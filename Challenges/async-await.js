@@ -8,17 +8,20 @@ class HttpError extends Error {
 async function loadJson(url) {
     let response = await fetch(url)
         .then(response => {
-            if (response.status == 200) {
-                return response.json();
+            return response.json();
+        }).catch(err => {
+            if (err instanceof HttpError && err.response.status == 404) {
+                alert("No such user, please reenter.");
+                return demoGithubUser();
             } else {
-                throw new HttpError(response);
+                throw err;
             }
         });
     return response;
 }
 
 async function demoGithubUser() {
-    let name = prompt("Enter a name?", "vanimar");
+    let name = prompt("Enter a name?", "UserName");
     let fullName = await loadJson(`https://api.github.com/users/${name}`).then(user => {
         alert(`Full name: ${user.name}.`);
         return user;
