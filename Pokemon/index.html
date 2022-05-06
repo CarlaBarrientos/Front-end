@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Pokedex</title>
+</head>
+
+<body>
+    <pokedex-card id="Hirotaka" image="https://static.wikia.nocookie.net/wotaku-ni-koi-wa-muzukashii/images/2/2
+2/348857.jpg/revision/latest?cb=20180606021302" name="Hirotaka Nifuji">
+    </pokedex-card>
+    <template id="cardTemplate">
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+        <div class="container">
+            <img src="" class="image">
+            <p class="name"></p>
+        </div>
+    </template>
+    <script src="card.js" defer></script>
+    <script src="utils.js"></script>
+</body>
+
+</html>
