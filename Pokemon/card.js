@@ -17,8 +17,16 @@ class Pokedex extends HTMLElement {
 
             this.getAttribute('name');
 
+        content.querySelector('.container').style.backgroundColor =
+
+            this.getAttribute('color');
+
+        content.querySelector('.container>.name').style.color =
+
+            this.getAttribute('font-color');
+
         shadow.appendChild(content);
     }
 }
-customElements.define('pokedex-card', Pokedex);
+
 

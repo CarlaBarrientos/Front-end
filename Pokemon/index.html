@@ -5,18 +5,24 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Pokedex</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-    <pokedex-card id="Hirotaka" image="https://static.wikia.nocookie.net/wotaku-ni-koi-wa-muzukashii/images/2/2
-2/348857.jpg/revision/latest?cb=20180606021302" name="Hirotaka Nifuji">
-    </pokedex-card>
+    <div class="main-container">
+    </div>
     <template id="cardTemplate">
         <style>
             .container {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                margin: 16px 0 16px 0;
+                border-radius: 10%;
+            }
+
+            .name {
+                text-transform: capitalize;
             }
         </style>
         <div class="container">
@@ -24,7 +30,7 @@
             <p class="name"></p>
         </div>
     </template>
-    <script src="card.js" defer></script>
+    <script src="card.js"></script>
     <script src="utils.js"></script>
 </body>
 

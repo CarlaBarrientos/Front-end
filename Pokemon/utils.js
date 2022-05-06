@@ -265,4 +265,13 @@ function getPokemonImageUri(id) {
   return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
 }
 
-console.log(getPokemonImageUri(1));
+dataPokemons.results.forEach((pokemon, index) => {
+  let fontColor = pokemonColorMap[index + 1] === "#f0f060e6" || pokemonColorMap[index + 1] === "#fbf6f6" ? "black" : "#fbf6f6";
+  const card = document.createElement('pokedex-card');
+  card.setAttribute('name', pokemon.name);
+  card.setAttribute('image', getPokemonImageUri(index + 1));
+  card.setAttribute('color', pokemonColorMap[index + 1]);
+  card.setAttribute('font-color', fontColor);
+  document.getElementsByClassName('main-container')[0].appendChild(card);
+});
+customElements.define('pokedex-card', Pokedex);
