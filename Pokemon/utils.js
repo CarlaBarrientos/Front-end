@@ -1,3 +1,34 @@
+class Pokedex extends HTMLElement {
+  constructor() {
+    super();
+
+    let shadow = this.attachShadow({
+      mode: 'closed'
+    });
+
+    let templateElem = document.getElementById('cardTemplate');
+    let content = templateElem.content.cloneNode(true);
+
+    content.querySelector('img').setAttribute('src',
+
+      this.getAttribute('image'));
+
+    content.querySelector('.container>.name').innerText =
+
+      this.getAttribute('name');
+
+    content.querySelector('.container').style.backgroundColor =
+
+      this.getAttribute('color');
+
+    content.querySelector('.container>.name').style.color =
+
+      this.getAttribute('font-color');
+
+    shadow.appendChild(content);
+  }
+}
+
 const pokemonColorMap = {
   "1": "#4ca04c",//green
   "2": "#4ca04c",
@@ -265,13 +296,29 @@ function getPokemonImageUri(id) {
   return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
 }
 
-dataPokemons.results.forEach((pokemon, index) => {
-  let fontColor = pokemonColorMap[index + 1] === "#f0f060e6" || pokemonColorMap[index + 1] === "#fbf6f6" ? "black" : "#fbf6f6";
-  const card = document.createElement('pokedex-card');
-  card.setAttribute('name', pokemon.name);
-  card.setAttribute('image', getPokemonImageUri(index + 1));
-  card.setAttribute('color', pokemonColorMap[index + 1]);
-  card.setAttribute('font-color', fontColor);
-  document.getElementsByClassName('main-container')[0].appendChild(card);
+function drawPokedex(data) {
+  data.results.forEach((pokemon, index) => {
+    const color = pokemonColorMap[index + 1];
+    let fontColor = color === "#f0f060e6" || color === "#fbf6f6" || color === "#ffb6c3" ? "black" : "#fbf6f6";
+    const card = document.createElement('pokedex-card');
+    card.setAttribute('name', pokemon.name);
+    card.setAttribute('image', getPokemonImageUri(index + 1));
+    card.setAttribute('color', color);
+    card.setAttribute('font-color', fontColor);
+    document.getElementsByClassName('main-container')[0].appendChild(card);
+  });
+  customElements.define('pokedex-card', Pokedex);
+}
+
+let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150";
+const fetchPokemons = fetch(url);
+fetchPokemons.then(response => {
+  return response.json();
+}).then(data => {
+  drawPokedex(data);
+}).catch(error => {
+  console.log(error);
 });
-customElements.define('pokedex-card', Pokedex);
+
+//drawPokedex(dataPokemons);
+
