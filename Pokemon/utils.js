@@ -305,7 +305,7 @@ function drawPokedex(data) {
     card.setAttribute('image', getPokemonImageUri(index + 1));
     card.setAttribute('color', color);
     card.setAttribute('font-color', fontColor);
-    document.getElementsByClassName('main-container')[0].appendChild(card);
+    document.getElementsByClassName('main')[0].appendChild(card);
   });
   customElements.define('pokedex-card', Pokedex);
 }
