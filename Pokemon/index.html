@@ -6,28 +6,49 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Pokedex</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="header">Header</div>
+        <header class="header">
+            <div>
+                <img class="header_logo-image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/640px-International_Pok%C3%A9mon_logo.svg.png" />
+            </div>
+            <div>
+                <button class="btn">Pokedex</button>
+            </div>
+        </header>
         <div class="main"></div>
-        <div class="footer">Footer</div>
+        <footer class="footer">
+            <div>
+                <a href="#" class="fa fa-youtube"></a>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-pinterest"></a>
+            </div>
+            <div class="links">
+                <p>Copyright © 2022 Pokedex </p>
+                <p>Privacy Policy</p>
+                <p>Terms</p>
+            </div>
+        </footer>
     </div>
     <template id="cardTemplate">
         <style>
             .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
                 margin: 16px 0 16px 0;
                 border-radius: 10%;
+                padding: 0 0 1px 0;
             }
 
             .name {
                 font-family: Roboto;
                 font-size: large;
                 text-transform: capitalize;
+                text-align: center;
             }
         </style>
         <div class="container">
