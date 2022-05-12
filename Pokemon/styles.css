@@ -3,11 +3,11 @@ body {
 }
 .container {
     display: grid;
-    grid-template-columns: repeat(8 1fr);
-    grid-template-areas: "header header header header header header header header" 
-    ". main main main main main main ." 
-    "footer footer footer footer footer footer footer footer";
+    grid-template-rows: 64px auto auto;
+    grid-template-areas: "header" "main" "footer";
     margin: 0;
+    font-family: Roboto;
+    font-size: 20px;
 }
 .main {
     grid-area: main;
@@ -18,91 +18,63 @@ body {
 .header {
     grid-area: header;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    box-shadow: 0 0 3px 0 rgb(167, 167, 167);
-    padding: 8px 56px 8px 56px;
-    height: 56px;
+    box-shadow: 0 0 4px 0 rgb(167, 167, 167);
+    padding: 8px 32px;
 }
-.header_logo-image {
-    grid-template: 3 / 4;
-    max-height: 48px;
-    margin: 0;
-    display: block;
-    float: left;
-} 
-.btn {
-    padding: 12px;
-    font-family: Roboto;
-    font-size: 16px;
-    border-radius: 8px;
-    background-color: inherit;
-    border: none;
-    outline: none;
-    cursor: pointer;
+
+.header>.header_logo>.header_logo-image {
+    max-height: 100%;
 }
-.btn::before {
-        background: url("pokebola.png") no-repeat scroll center center / 100% auto rgba(0, 0, 0, 0);
-        content: "";
-        display: inline-block;
-        color: #fff;
-        height: 30px;
-        width: 30px;
-        vertical-align: middle;
-        margin-right: 8px;
+
+.header_button {
+    display: flex;
+    flex-flow: row;
+    padding: 8px;
+    border-radius: 12px;
 }
-.btn:hover {
+
+.header_button-text {
+    margin: 0 0 0 8px;
+    align-self: center;
+}
+.header_button:hover {
     background-color: #e7e7e7;
 }
 .footer {
     grid-area: footer;
     display: flex;
     flex-direction: row;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 0 3px 0 rgb(167, 167, 167);
-    padding: 24px 56px 24px 56px;
-    height: 56px;
-    font-size: 30px;
+    box-shadow: 0 0 4px 0 rgb(167, 167, 167);
+    padding: 8px 32px;
 }
-.links {
+.footer > * {
+    flex:  1;
+}
+.footer>.footer_social {
     display: flex;
-    flex-direction: row;
-    font-size: 16px;
-    font-family: Roboto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
 }
-.links p{
-    margin-left: 36px;
+.footer>.footer_info {
+    text-align: center;
+    padding: 0 32px;
+}
+.footer>.footer_links {
+    display: flex;
+    justify-content: space-evenly;
 }
 .fa {
-    margin: 0 24px 0 0;
-    padding: 20px;
-    font-size: 30px;
-    width: 30px;
+    margin: 8px;
     text-align: center;
     text-decoration: none;
     border-radius: 50%;
+    color: black;
 }
 .fa:hover {
-    opacity: 0.7;
-}
-.fa-facebook {
-    background: #3B5998;
-    color: white;;
-}
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-}
-.fa-youtube {
-    background: #bb0000;
-    color: white;
-}
-.fa-instagram {
-    background: #d62976;
-    color: white;
-}
-.fa-pinterest {
-    background: #cb2027;
-    color: white;
+    opacity: 0.5;
 }
