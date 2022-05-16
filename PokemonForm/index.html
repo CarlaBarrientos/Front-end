@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Pokedex Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="form-row my-3">
+                <h2 class="col-md-6 col-sm-6">Register your new Pokemon</h2>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="input-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDesc">Description</label>
+                        <textarea class="form-control" id="input-desc" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUrl">URL</label>
+                        <input type="text" class="form-control" id="input-url">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputHeight">Height</label>
+                        <input type="text" class="form-control" id="input-height">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputWeight">Weight</label>
+                        <input type="text" class="form-control" id="input-weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputColor">Color</label>
+                        <select id="input-color" class="form-control">
+                            <option selected>Choose a color...</option>
+                            <option>Black</option>
+                            <option>Blue</option>
+                            <option>Brown</option>
+                            <option>Gray</option>
+                            <option>Green</option>
+                            <option>Pink</option>
+                            <option>Purple</option>
+                            <option>Red</option>
+                            <option>White</option>
+                            <option>Yellow</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEgg">Egg Group</label>
+                        <select id="input-egg" class="form-control">
+                            <option selected>Choose an egg group...</option>
+                            <option>Monster</option>
+                            <option>Water1</option>
+                            <option>Water2</option>
+                            <option>Water3</option>
+                            <option>Bug</option>
+                            <option>Flying</option>
+                            <option>Ground</option>
+                            <option>Fairy</option>
+                            <option>Plant</option>
+                            <option>Humanshape</option>
+                            <option>Mineral</option>
+                            <option>Indeterminate</option>
+                            <option>Ditto</option>
+                            <option>Dragon</option>
+                            <option>No-eggs</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="helperText">Helper text</label>
+                        <textarea class="form-control" id="helper-text" rows="24"
+                            readonly>Here is going to display some text to help you fill the form.</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <button type="submit" class="btn btn-primary col-md-6 col-sm-6">Register Pokemon</button>
+            </div>
+        </form>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
