@@ -1,8 +1,8 @@
-let concat = require('gulp-concat');
-let uglify = require('gulp-uglify');
-let gulp = require('gulp');
-let less = require('gulp-less');
-const cleanDir = require('gulp-clean-dir');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const gulp = require('gulp');
+const less = require('gulp-less');
+const del = require('del');
 
 const compileLess = function () {
     return gulp.src('src/*.less')
@@ -26,9 +26,7 @@ const compileConcat = function () {
 gulp.task('concat', compileConcat);
 
 const compileClean = function () {
-    return gulp.src('.')
-        .pipe(cleanDir('./dist'))
-        .pipe(gulp.dest('./dist'));
+    return del('dist/**', { force: true });
 };
 gulp.task('clean', compileClean);
 
