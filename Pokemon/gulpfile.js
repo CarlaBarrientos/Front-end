@@ -5,6 +5,7 @@ const less = require('gulp-less');
 const cssmin = require('gulp-cssmin');
 const del = require('del');
 const rename = require('gulp-rename');
+const inject = require('gulp-inject');
 
 let paths = {
     styles_less: {
@@ -20,6 +21,12 @@ let paths = {
         dest: 'dist/js'
     }
 };
+
+async function inject_min() {
+    return gulp.src('./src/index.html')
+        .pipe(inject(gulp.src(['./dist/css/styles.min.css', './dist/js/build.min.js'], { read: false }), { relative: true }))
+        .pipe(gulp.dest('./src'));
+}
 
 function styles_less() {
     return gulp.src(paths.styles_less.src)
@@ -41,5 +48,5 @@ async function clean() {
     return del([__dirname + '/dist']);
 }
 
-exports.default = gulp.series(clean, scripts, styles_less);
+exports.default = gulp.series(clean, scripts, styles_less, inject_min);
 
