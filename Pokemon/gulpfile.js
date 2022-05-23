@@ -1,32 +1,45 @@
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
 const gulp = require('gulp');
+const concat = require('gulp-concat');
+const minify = require('gulp-uglify');
 const less = require('gulp-less');
+const cssmin = require('gulp-cssmin');
 const del = require('del');
+const rename = require('gulp-rename');
 
-const compileLess = function () {
-    return gulp.src('src/*.less')
+let paths = {
+    styles_less: {
+        src: 'src/*.less',
+        dest: 'src/css/'
+    },
+    styles_css: {
+        src: 'src/css/*.css',
+        dest: 'dist/css'
+    },
+    scripts: {
+        src: 'src/*.js',
+        dest: 'dist/js'
+    }
+};
+
+function styles_less() {
+    return gulp.src(paths.styles_less.src)
         .pipe(less())
-        .pipe(gulp.dest('./dist/css/'));
-};
-gulp.task('less', compileLess);
+        .pipe(cssmin())
+        .pipe(rename('styles.min.css'))
+        .pipe(gulp.dest(paths.styles_css.dest));
+}
 
-const compileUglify = function () {
-    return gulp.src('src/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js/uglify.js'));
-};
-gulp.task('uglify', compileUglify);
+function scripts() {
+    return gulp.src(paths.scripts.src)
+        .pipe(concat('build.js'))
+        .pipe(minify())
+        .pipe(rename('build.min.js'))
+        .pipe(gulp.dest(paths.scripts.dest))
+}
 
-const compileConcat = function () {
-    return gulp.src('src/*.js')
-        .pipe(concat('concat.js'))
-        .pipe(gulp.dest('./dist/js/'));
-};
-gulp.task('concat', compileConcat);
+async function clean() {
+    return del([__dirname + '/dist']);
+}
 
-const compileClean = function () {
-    return del('dist/**', { force: true });
-};
-gulp.task('clean', compileClean);
+exports.default = gulp.series(clean, scripts, styles_less);
 
