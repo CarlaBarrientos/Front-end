@@ -1,0 +1,11 @@
+@import "bootstrap";
+$theme-colors: (
+    "primary": #861682,
+    "danger": #0d8a12,
+    "custom-color": #861682
+);
+
+$body-color: red;
+body {
+    color: $body-color;
+}
