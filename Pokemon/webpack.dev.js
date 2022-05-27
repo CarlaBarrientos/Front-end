@@ -1,20 +1,22 @@
 const path = require("path");
 const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
+const common = require("./webpack.common.js")
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
 
 module.exports = merge(common, {
     mode: "development",
     output: {
-        filename: 'main.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
-    // devServer: {
-    //     static: {
-    //         directory: path.join(__dirname, 'dist')
-    //     },
-    //     compress: true,
-    //     port: 9000
-    // },
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, 'dist')
+        },
+        port: 4000
+    },
     module: {
         rules: [
             {
@@ -30,5 +32,20 @@ module.exports = merge(common, {
                 use: ['style-loader', 'css-loader', 'less-loader']
             }
         ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Development',
+            template: path.resolve(__dirname, './src/index.html')
+        })],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: 'all'
+                }
+            }
+        }
     }
 });

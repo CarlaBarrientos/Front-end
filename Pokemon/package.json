@@ -5,12 +5,14 @@
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "webpack --config ./webpack.prod.js",
-    "dev": "webpack --config ./webpack.dev.js"
+    "build:prod": "webpack --config ./webpack.prod.js",
+    "build:dev": "webpack --config ./webpack.dev.js",
+    "start": "webpack serve --config ./webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "grunt": "^1.5.3",
     "grunt-contrib-clean": "^2.0.1",
@@ -26,11 +28,13 @@
     "gulp-inject": "^5.0.5",
     "gulp-less": "^5.0.0",
     "gulp-uglify": "^3.0.2",
+    "html-webpack-plugin": "^5.5.0",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
