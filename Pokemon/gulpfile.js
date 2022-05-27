@@ -22,9 +22,9 @@ let paths = {
     }
 };
 
-async function inject_min() {
+function inject_min() {
     return gulp.src('./src/index.html')
-        .pipe(inject(gulp.src(['./dist/css/styles.min.css', './dist/js/build.min.js'], { read: false }), { relative: true }))
+        .pipe(inject(gulp.src(['./dist/css/styles.min.css', './dist/js/build.min.js']), { relative: true }))
         .pipe(gulp.dest('./src'));
 }
 

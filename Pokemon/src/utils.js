@@ -1,3 +1,7 @@
+import './styles.less';
+import Pokebola from './pokebola.png';
+import Logo from './logo.png';
+import { hello } from './test';
 class Pokedex extends HTMLElement {
   constructor() {
     super();
@@ -297,6 +301,10 @@ function getPokemonImageUri(id) {
 }
 
 function drawPokedex(data) {
+  hello('name');
+  document.getElementsByClassName('header_button-icon')[0].src = Pokebola;
+  document.getElementsByClassName('header_logo-image')[0].src = Logo;
+
   data.results.forEach((pokemon, index) => {
     const color = pokemonColorMap[index + 1];
     let fontColor = color === "#f0f060e6" || color === "#fbf6f6" || color === "#ffb6c3" ? "black" : "#fbf6f6";
