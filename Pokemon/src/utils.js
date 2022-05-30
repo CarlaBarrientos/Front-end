@@ -1,7 +1,3 @@
-import './styles.less';
-import Pokebola from './pokebola.png';
-import Logo from './logo.png';
-import { hello } from './test';
 class Pokedex extends HTMLElement {
   constructor() {
     super();
@@ -300,11 +296,7 @@ function getPokemonImageUri(id) {
   return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
 }
 
-function drawPokedex(data) {
-  hello('name');
-  document.getElementsByClassName('header_button-icon')[0].src = Pokebola;
-  document.getElementsByClassName('header_logo-image')[0].src = Logo;
-
+export function drawPokedex(data) {
   data.results.forEach((pokemon, index) => {
     const color = pokemonColorMap[index + 1];
     let fontColor = color === "#f0f060e6" || color === "#fbf6f6" || color === "#ffb6c3" ? "black" : "#fbf6f6";
@@ -318,15 +310,15 @@ function drawPokedex(data) {
   customElements.define('pokedex-card', Pokedex);
 }
 
-let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150";
-const fetchPokemons = fetch(url);
-fetchPokemons.then(response => {
-  return response.json();
-}).then(data => {
-  drawPokedex(data);
-}).catch(error => {
-  console.log(error);
-});
+// let url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150";
+// const fetchPokemons = fetch(url);
+// fetchPokemons.then(response => {
+//   return response.json();
+// }).then(data => {
+//   drawPokedex(data);
+// }).catch(error => {
+//   console.log(error);
+// });
 
 //drawPokedex(dataPokemons);
 

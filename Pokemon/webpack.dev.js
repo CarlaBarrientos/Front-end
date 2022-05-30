@@ -17,6 +17,7 @@ module.exports = merge(common, {
         },
         port: 4000
     },
+    devtool: 'eval',
     module: {
         rules: [
             {
@@ -40,8 +41,9 @@ module.exports = merge(common, {
         })],
     optimization: {
         splitChunks: {
+            minSize: 0,
             cacheGroups: {
-                vendor: {
+                defaultVendors: {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'all'
                 }
