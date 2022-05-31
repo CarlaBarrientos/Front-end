@@ -1,6 +1,6 @@
-import './styles.less';
-import Pokebola from './pokebola.png';
-import Logo from './logo.png';
+import './styles/styles.less';
+import Pokebola from './assets/pokebola.png';
+import Logo from './assets/logo.png';
 import { drawPokedex } from './utils';
 import { getPokemons } from './api';
 
