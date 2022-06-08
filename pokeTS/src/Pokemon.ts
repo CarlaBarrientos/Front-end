@@ -55,11 +55,9 @@ export class Pokemon {
     this.buildFieldsPokemon(pokemonResult);
   }
 
-  async buildFieldsPokemon(pokemon: Pokemon) {
+  buildFieldsPokemon(pokemon: Pokemon) {
     this.name = pokemon.name;
     this.id = pokemon.id;
-    // you can only choose four moves from the list of moves
-    this.moves = this.getFourMoves(pokemon.moves.map((move: any) => move.move as Move));
     this.types = pokemon.types.map((type: any) => type.type as Type);
   }
 
@@ -76,7 +74,7 @@ export class Pokemon {
     });
   }
 
-  getFourMoves(moves: Move[]) {
+  async getFourMoves(moves: Move[]) {
     let fourMoves: Move[] = [];
     const size = moves.length;
     if(size > 4) {
@@ -88,16 +86,16 @@ export class Pokemon {
       fourMoves = moves;
     }
 
-    // const result = await Promise.all(fourMoves.map(async move => {
-    //   const response = await this.getMoveInformation(move.url);
-    //   move.accuracy = response.accuracy;
-    //   move.damage = response.power;
-    //   move.powerPoints = response.pp;
-    //   move.type = response.type;
-    //   return move;
-    // }));
+    const result = await Promise.all(fourMoves.map(async move => {
+      const response = await this.getMoveInformation(move.url);
+      move.accuracy = response.accuracy;
+      move.damage = response.power;
+      move.powerPoints = response.pp;
+      move.type = response.type;
+      return move;
+    }));
 
-    return fourMoves;
+    this.moves = result;
   }
 
   generateUniqueRandom(size: number): number[] {
@@ -127,17 +125,24 @@ export class PokemonTrainer {
   async getPokemons() {
     const listPokemons = this.listOfIds.map(id => getSinglePokemon(id));
     const results = await Promise.all(listPokemons)
-    results.forEach(result => {
-      this.pokemons.push(new Pokemon(result.data));
-    });
+    await Promise.all(results.map(async (result) => {
+      const newPokemon = await this.getPokemonInformation(result.data);
+      this.pokemons.push(newPokemon);
+    }));
   }
 
   async showTeam() {
     await this.getPokemons();
     console.log('Trainer:', this.name);
-    this.pokemons.forEach(pokemon => {
+    this.pokemons.forEach(async pokemon => {
       pokemon.displayInfo();
     });
+  }
+
+  async getPokemonInformation(pokemon: Pokemon) {
+    const newPokemon = new Pokemon(pokemon);
+    await newPokemon.getFourMoves(pokemon.moves.map((move: any) => move.move as Move));
+    return newPokemon;
   }
 }
  

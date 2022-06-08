@@ -108,16 +108,9 @@ var Pokemon = /** @class */ (function () {
         this.buildFieldsPokemon(pokemonResult);
     }
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.name = pokemon.name;
-                this.id = pokemon.id;
-                // you can only choose four moves from the list of moves
-                this.moves = this.getFourMoves(pokemon.moves.map(function (move) { return move.move; }));
-                this.types = pokemon.types.map(function (type) { return type.type; });
-                return [2 /*return*/];
-            });
-        });
+        this.name = pokemon.name;
+        this.id = pokemon.id;
+        this.types = pokemon.types.map(function (type) { return type.type; });
     };
     Pokemon.prototype.displayInfo = function () {
         console.log("==========================");
@@ -132,26 +125,45 @@ var Pokemon = /** @class */ (function () {
         });
     };
     Pokemon.prototype.getFourMoves = function (moves) {
-        var fourMoves = [];
-        var size = moves.length;
-        if (size > 4) {
-            var indexes = this.generateUniqueRandom(size);
-            fourMoves = indexes.map(function (index) {
-                return moves[index];
+        return __awaiter(this, void 0, void 0, function () {
+            var fourMoves, size, indexes, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        fourMoves = [];
+                        size = moves.length;
+                        if (size > 4) {
+                            indexes = this.generateUniqueRandom(size);
+                            fourMoves = indexes.map(function (index) {
+                                return moves[index];
+                            });
+                        }
+                        else {
+                            fourMoves = moves;
+                        }
+                        return [4 /*yield*/, Promise.all(fourMoves.map(function (move) { return __awaiter(_this, void 0, void 0, function () {
+                                var response;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, this.getMoveInformation(move.url)];
+                                        case 1:
+                                            response = _a.sent();
+                                            move.accuracy = response.accuracy;
+                                            move.damage = response.power;
+                                            move.powerPoints = response.pp;
+                                            move.type = response.type;
+                                            return [2 /*return*/, move];
+                                    }
+                                });
+                            }); }))];
+                    case 1:
+                        result = _a.sent();
+                        this.moves = result;
+                        return [2 /*return*/];
+                }
             });
-        }
-        else {
-            fourMoves = moves;
-        }
-        // const result = await Promise.all(fourMoves.map(async move => {
-        //   const response = await this.getMoveInformation(move.url);
-        //   move.accuracy = response.accuracy;
-        //   move.damage = response.power;
-        //   move.powerPoints = response.pp;
-        //   move.type = response.type;
-        //   return move;
-        // }));
-        return fourMoves;
+        });
     };
     Pokemon.prototype.generateUniqueRandom = function (size) {
         var indexes = new Set();
@@ -192,9 +204,20 @@ var PokemonTrainer = /** @class */ (function () {
                         return [4 /*yield*/, Promise.all(listPokemons)];
                     case 1:
                         results = _a.sent();
-                        results.forEach(function (result) {
-                            _this.pokemons.push(new Pokemon(result.data));
-                        });
+                        return [4 /*yield*/, Promise.all(results.map(function (result) { return __awaiter(_this, void 0, void 0, function () {
+                                var newPokemon;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, this.getPokemonInformation(result.data)];
+                                        case 1:
+                                            newPokemon = _a.sent();
+                                            this.pokemons.push(newPokemon);
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }))];
+                    case 2:
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
@@ -202,16 +225,35 @@ var PokemonTrainer = /** @class */ (function () {
     };
     PokemonTrainer.prototype.showTeam = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.getPokemons()];
                     case 1:
                         _a.sent();
                         console.log('Trainer:', this.name);
-                        this.pokemons.forEach(function (pokemon) {
-                            pokemon.displayInfo();
-                        });
+                        this.pokemons.forEach(function (pokemon) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                pokemon.displayInfo();
+                                return [2 /*return*/];
+                            });
+                        }); });
                         return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PokemonTrainer.prototype.getPokemonInformation = function (pokemon) {
+        return __awaiter(this, void 0, void 0, function () {
+            var newPokemon;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        newPokemon = new Pokemon(pokemon);
+                        return [4 /*yield*/, newPokemon.getFourMoves(pokemon.moves.map(function (move) { return move.move; }))];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, newPokemon];
                 }
             });
         });
