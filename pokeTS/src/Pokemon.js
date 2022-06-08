@@ -79,16 +79,25 @@ function getSinglePokemon(id) {
     return axios_1.default.get("https://pokeapi.co/api/v2/pokemon/".concat(id));
 }
 exports.getSinglePokemon = getSinglePokemon;
-function getNewPokemons(constructor) {
-    return /** @class */ (function (_super) {
-        __extends(class_1, _super);
-        function class_1() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.listOfIds = [1];
-            return _this;
-        }
-        return class_1;
-    }(constructor));
+function getNewPokemons(param) {
+    return function (constructor) {
+        return /** @class */ (function (_super) {
+            __extends(class_1, _super);
+            function class_1() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.listOfIds = _this.getRandomIds();
+                return _this;
+            }
+            class_1.prototype.getRandomIds = function () {
+                var indexes = new Set();
+                while (indexes.size < param) {
+                    indexes.add(Math.floor(Math.random() * (500)));
+                }
+                return Array.from(indexes);
+            };
+            return class_1;
+        }(constructor));
+    };
 }
 var Pokemon = /** @class */ (function () {
     function Pokemon(pokemonResult) {
@@ -113,15 +122,16 @@ var Pokemon = /** @class */ (function () {
     Pokemon.prototype.displayInfo = function () {
         console.log("==========================");
         console.log("".concat(this.id, " ").concat(this.name));
+        console.log("--------------------------");
         this.types.forEach(function (type) {
             console.log("".concat(type.name));
         });
+        console.log("--------------------------");
         this.moves.forEach(function (move) {
             console.log("".concat(move.name));
         });
     };
     Pokemon.prototype.getFourMoves = function (moves) {
-        var _this = this;
         var fourMoves = [];
         var size = moves.length;
         if (size > 4) {
@@ -133,15 +143,14 @@ var Pokemon = /** @class */ (function () {
         else {
             fourMoves = moves;
         }
-        fourMoves.forEach(function (move) {
-            _this.getMoveInformation(move.url)
-                .then(function (resolve) {
-                move.accuracy = resolve.data.accuracy;
-                move.damage = resolve.data.power;
-                move.powerPoints = resolve.data.pp;
-                move.type = resolve.data.type;
-            });
-        });
+        // const result = await Promise.all(fourMoves.map(async move => {
+        //   const response = await this.getMoveInformation(move.url);
+        //   move.accuracy = response.accuracy;
+        //   move.damage = response.power;
+        //   move.powerPoints = response.pp;
+        //   move.type = response.type;
+        //   return move;
+        // }));
         return fourMoves;
     };
     Pokemon.prototype.generateUniqueRandom = function (size) {
@@ -153,10 +162,13 @@ var Pokemon = /** @class */ (function () {
     };
     Pokemon.prototype.getMoveInformation = function (url) {
         return __awaiter(this, void 0, void 0, function () {
+            var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, axios_1.default.get(url)];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response.data];
                 }
             });
         });
@@ -205,7 +217,7 @@ var PokemonTrainer = /** @class */ (function () {
         });
     };
     PokemonTrainer = __decorate([
-        getNewPokemons,
+        getNewPokemons(3),
         __metadata("design:paramtypes", [String])
     ], PokemonTrainer);
     return PokemonTrainer;

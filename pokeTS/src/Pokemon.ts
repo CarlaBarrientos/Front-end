@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 /*
 
 Pokemon class
@@ -16,9 +16,18 @@ export function getSinglePokemon(id: string | number) {
   return axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
-function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
-  return class extends constructor {
-    listOfIds = [1];
+function getNewPokemons(param: number) {
+  return function <T extends { new(...args: any[]): { } }>(constructor: T) {
+      return class extends constructor {
+        getRandomIds() {
+          const indexes = new Set<number>();
+          while(indexes.size < param) {
+            indexes.add(Math.floor(Math.random() * (500)))
+          }
+          return Array.from(indexes);
+        }
+        listOfIds = this.getRandomIds();
+      }
   }
 }
 
@@ -57,9 +66,11 @@ export class Pokemon {
   displayInfo() {
     console.log(`==========================`);
     console.log(`${this.id} ${this.name}`);
+    console.log(`--------------------------`);
     this.types.forEach(type => {
       console.log(`${type.name}`);
     });
+    console.log(`--------------------------`);
     this.moves.forEach(move => {
       console.log(`${move.name}`);
     });
@@ -77,15 +88,14 @@ export class Pokemon {
       fourMoves = moves;
     }
 
-    fourMoves.forEach(move => {
-      this.getMoveInformation(move.url)
-        .then((resolve) => {
-          move.accuracy = resolve.data.accuracy;
-          move.damage = resolve.data.power;
-          move.powerPoints = resolve.data.pp;
-          move.type = resolve.data.type;
-      });
-    });
+    // const result = await Promise.all(fourMoves.map(async move => {
+    //   const response = await this.getMoveInformation(move.url);
+    //   move.accuracy = response.accuracy;
+    //   move.damage = response.power;
+    //   move.powerPoints = response.pp;
+    //   move.type = response.type;
+    //   return move;
+    // }));
 
     return fourMoves;
   }
@@ -99,15 +109,17 @@ export class Pokemon {
   }
 
   async getMoveInformation(url: string) {
-    return await axios.get(url);
+    const response = await axios.get(url);
+    return response.data;
   }
 }
 
-@getNewPokemons
+@getNewPokemons(3)
 export class PokemonTrainer {
   name: string;
   pokemons: Pokemon[] = [];
   listOfIds: number[];
+
   constructor(name: string) {
     this.name = name;
   }
@@ -127,5 +139,5 @@ export class PokemonTrainer {
       pokemon.displayInfo();
     });
   }
-
 }
+ 
