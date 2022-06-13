@@ -12,8 +12,16 @@ List of goals:
   - fill Moves with missing data from Types you can get the information from url of the move.
   - re-write decortator to get new pokemons Ids in PokemonTrainer class
 */
+const MAX_MOVES = 4;
+const MAX_POKEMONS = 500;
+
 export function getSinglePokemon(id: string | number) {
   return axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+}
+
+export async function getMoveInformation(url: string) {
+  const response = await axios.get(url);
+  return response.data;
 }
 
 function getNewPokemons(param: number) {
@@ -22,7 +30,7 @@ function getNewPokemons(param: number) {
         getRandomIds() {
           const indexes = new Set<number>();
           while(indexes.size < param) {
-            indexes.add(Math.floor(Math.random() * (500)))
+            indexes.add(Math.floor(Math.random() * (MAX_POKEMONS)))
           }
           return Array.from(indexes);
         }
@@ -70,7 +78,7 @@ export class Pokemon {
     });
     console.log(`--------------------------`);
     this.moves.forEach(move => {
-      console.log(`${move.name}`);
+      console.log(`${move.name}+${move.accuracy}`);
     });
   }
 
@@ -87,7 +95,7 @@ export class Pokemon {
     }
 
     const result = await Promise.all(fourMoves.map(async move => {
-      const response = await this.getMoveInformation(move.url);
+      const response = await getMoveInformation(move.url);
       move.accuracy = response.accuracy;
       move.damage = response.power;
       move.powerPoints = response.pp;
@@ -100,16 +108,12 @@ export class Pokemon {
 
   generateUniqueRandom(size: number): number[] {
     const indexes = new Set<number>();
-    while(indexes.size < 4) {
+    while(indexes.size < MAX_MOVES) {
       indexes.add(Math.floor(Math.random() * (size)))
     }
     return Array.from(indexes);
   }
-
-  async getMoveInformation(url: string) {
-    const response = await axios.get(url);
-    return response.data;
-  }
+  
 }
 
 @getNewPokemons(3)
@@ -134,7 +138,7 @@ export class PokemonTrainer {
   async showTeam() {
     await this.getPokemons();
     console.log('Trainer:', this.name);
-    this.pokemons.forEach(async pokemon => {
+    this.pokemons.forEach(pokemon => {
       pokemon.displayInfo();
     });
   }
