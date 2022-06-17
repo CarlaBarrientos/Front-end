@@ -1,0 +1,18 @@
+<section>
+  <header class="header">
+    <h1>Tareas</h1>
+    <input id="new-todo" [(ngModel)]="nuevaTarea" class="new-todo" type="text" autofocus placeholder="Nueva Tarea"
+      (keyup.enter)="crearTarea()" />
+  </header>
+  <section id="main" class="main">
+    <ul id="todo-list" class="todo-list">
+      <li *ngFor="let tarea of listaTareas; index as i">
+        <input type="checkbox" class="toggle" (click)="marcarTarea(i)">
+        <label
+          [ngStyle]="{'text-decoration': tarea.hecho === true ? 'line-through' : 'none' }">{{ tarea.descripcion }}</label>
+        <button class="destroy" (click)="eliminarTarea(i)"></button>
+      </li>
+    </ul>
+
+  </section>
+</section>
