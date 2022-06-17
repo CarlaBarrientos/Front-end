@@ -30,14 +30,14 @@ module.exports = merge(common, {
         splitChunks: {
             minSize: 0,
             cacheGroups: {
-                // default: {
-                //     test: /[\\/]src[\\/]/,
-                //     chunks: 'all',
-                //     name: (module, chunks, cacheGroupKey) => {
-                //         const allChunksNames = chunks.map((chunk) => chunk.name).join('-');
-                //         return allChunksNames;
-                //     }
-                // },
+                default: {
+                    test: /[\\/]src[\\/]/,
+                    chunks: 'all',
+                    name: (module, chunks, cacheGroupKey) => {
+                        const allChunksNames = chunks.map((chunk) => chunk.name).join('-');
+                        return allChunksNames;
+                    }
+                },
                 defaultVendors: {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'all',

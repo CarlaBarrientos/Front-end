@@ -85,11 +85,9 @@ export class Pokemon {
   async getFourMoves(moves: Move[]) {
     let fourMoves: Move[] = [];
     const size = moves.length;
-    if(size > 4) {
+    if(size > MAX_MOVES) {
         const indexes = this.generateUniqueRandom(size);
-        fourMoves = indexes.map((index) => {
-          return moves[index];
-        });
+        fourMoves = indexes.map((index) => moves[index]);
     } else {
       fourMoves = moves;
     }

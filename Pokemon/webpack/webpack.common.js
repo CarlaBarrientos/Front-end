@@ -3,9 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        main: './src/index.js',
-        utils: './src/utils.js',
-        api: './src/api.js'
+        main: './src/index.js'
     },
     module: {
         rules: [
@@ -17,7 +15,6 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Production',
             template: path.resolve(__dirname, '../src/index.html')
         })
     ]

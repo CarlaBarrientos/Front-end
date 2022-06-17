@@ -60,7 +60,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PokemonTrainer = exports.Pokemon = exports.getSinglePokemon = void 0;
+exports.PokemonTrainer = exports.Pokemon = exports.getMoveInformation = exports.getSinglePokemon = void 0;
 var axios_1 = require("axios");
 /*
 
@@ -75,10 +75,26 @@ List of goals:
   - fill Moves with missing data from Types you can get the information from url of the move.
   - re-write decortator to get new pokemons Ids in PokemonTrainer class
 */
+var MAX_MOVES = 4;
+var MAX_POKEMONS = 500;
 function getSinglePokemon(id) {
     return axios_1.default.get("https://pokeapi.co/api/v2/pokemon/".concat(id));
 }
 exports.getSinglePokemon = getSinglePokemon;
+function getMoveInformation(url) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios_1.default.get(url)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+            }
+        });
+    });
+}
+exports.getMoveInformation = getMoveInformation;
 function getNewPokemons(param) {
     return function (constructor) {
         return /** @class */ (function (_super) {
@@ -91,7 +107,7 @@ function getNewPokemons(param) {
             class_1.prototype.getRandomIds = function () {
                 var indexes = new Set();
                 while (indexes.size < param) {
-                    indexes.add(Math.floor(Math.random() * (500)));
+                    indexes.add(Math.floor(Math.random() * (MAX_POKEMONS)));
                 }
                 return Array.from(indexes);
             };
@@ -121,7 +137,7 @@ var Pokemon = /** @class */ (function () {
         });
         console.log("--------------------------");
         this.moves.forEach(function (move) {
-            console.log("".concat(move.name));
+            console.log("".concat(move.name, "+").concat(move.accuracy));
         });
     };
     Pokemon.prototype.getFourMoves = function (moves) {
@@ -146,7 +162,7 @@ var Pokemon = /** @class */ (function () {
                                 var response;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, this.getMoveInformation(move.url)];
+                                        case 0: return [4 /*yield*/, getMoveInformation(move.url)];
                                         case 1:
                                             response = _a.sent();
                                             move.accuracy = response.accuracy;
@@ -167,23 +183,10 @@ var Pokemon = /** @class */ (function () {
     };
     Pokemon.prototype.generateUniqueRandom = function (size) {
         var indexes = new Set();
-        while (indexes.size < 4) {
+        while (indexes.size < MAX_MOVES) {
             indexes.add(Math.floor(Math.random() * (size)));
         }
         return Array.from(indexes);
-    };
-    Pokemon.prototype.getMoveInformation = function (url) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, axios_1.default.get(url)];
-                    case 1:
-                        response = _a.sent();
-                        return [2 /*return*/, response.data];
-                }
-            });
-        });
     };
     return Pokemon;
 }());
@@ -225,19 +228,15 @@ var PokemonTrainer = /** @class */ (function () {
     };
     PokemonTrainer.prototype.showTeam = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.getPokemons()];
                     case 1:
                         _a.sent();
                         console.log('Trainer:', this.name);
-                        this.pokemons.forEach(function (pokemon) { return __awaiter(_this, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                pokemon.displayInfo();
-                                return [2 /*return*/];
-                            });
-                        }); });
+                        this.pokemons.forEach(function (pokemon) {
+                            pokemon.displayInfo();
+                        });
                         return [2 /*return*/];
                 }
             });

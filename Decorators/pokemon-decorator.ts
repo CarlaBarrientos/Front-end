@@ -5,17 +5,19 @@ const checkPP = () => (
   ) => {
 	const originalMethod = descriptor.value;
   
-	descriptor.value = function (...args: any) {
-		const pokemon = this as Pokemon;
-	  if (pokemon.ppAvailable > 0) {
-		originalMethod.apply(this, args);
-	  } else {
-		console.log('You can not attack to other Pokemons');
-	  }
+	descriptor.value = function (...args: Move[]) {
+		// const currentPokemon = this as Pokemon;
+	  	// if (currentPokemon.ppAvailable > 0) {
+		if (this.ppAvailable > 0) {
+			originalMethod.apply(this, args);
+	  	} else {
+			console.log('You can not attack to other Pokemons');
+	  	}
 	};
   
 	return descriptor;
-  }; 
+}; 
+
 type Move = {
 	name: string,
 	power: number
