@@ -1,4 +1,4 @@
-<div class="pokemon-card">
-  <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png" class="pokemon-card_image">
-  <p class="pokemon-card_name">Bulbasaur</p>
+<div class="pokemon-card" [ngStyle]="{'background-color': pokemonInformation.color}">
+  <img src="{{pokemonInformation.image}}" class="pokemon-card_image">
+  <p class="pokemon-card_name">{{pokemonInformation.name}}</p>
 </div>
