@@ -1,45 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../core/models/Pokemon';
+import { dataPokemons, pokemonColorMap, getPokemonImageUri } from '../../utils/utils';
 
 @Component({
     selector: 'app-pokemon-list',
     templateUrl: './pokemon-list.component.html',
     styleUrls: ['./pokemon-list.component.scss']
 })
-export class PokemonListComponent {
-
-    listOfPokemons: Pokemon[] = [
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        },
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        },
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        },
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        },
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        },
-        {
-            name: 'Bulbasaur',
-            image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-            color: '#4ca04c'
-        }
-    ];
+export class PokemonListComponent implements OnInit {
+    
+    listOfPokemons: Pokemon[] = [];
 
     constructor() { }
+
+    ngOnInit() {
+        this.getPokemons();
+    }
+
+    getPokemons() {
+        dataPokemons.results.map((pokemon, index) => {
+            const id =  index + 1;
+            const image = getPokemonImageUri(id);
+            const color = pokemonColorMap[id];
+            this.listOfPokemons.push({
+                name: pokemon.name,
+                image: image,
+                color: color
+            })
+        });
+    }
 }

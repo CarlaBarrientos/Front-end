@@ -1,4 +1,4 @@
-export const pokemonColorMap = {
+export const pokemonColorMap: { [key: string]: string } = {
     "1": "#4ca04c",//green
     "2": "#4ca04c",
     "3": "#4ca04c",
@@ -152,7 +152,7 @@ export const pokemonColorMap = {
     "151": "#ffb6c3",
 }
 
-const dataPokemons = {
+export const dataPokemons = {
     "count": 1118,
     "next": "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20",
     "previous": null,
@@ -260,7 +260,7 @@ const dataPokemons = {
     ]
 };
 
-export function getPokemonImageUri(id) {
+export function getPokemonImageUri(id: number) {
     const imageId = ('00' + id).slice(-3); // para 1 => 001
     return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imageId}.png`;
 }
