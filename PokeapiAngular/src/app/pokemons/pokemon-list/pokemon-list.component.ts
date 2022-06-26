@@ -23,6 +23,7 @@ export class PokemonListComponent implements OnInit {
             const image = getPokemonImageUri(id);
             const color = pokemonColorMap[id];
             this.listOfPokemons.push({
+                id: `#${id}`,
                 name: pokemon.name,
                 image: image,
                 color: color

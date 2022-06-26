@@ -6,9 +6,17 @@
     align-items: center;
 
     &_name {
-        font-family: Roboto;
         font-size: large;
         text-transform: capitalize;
+    }
+
+    &_number {
+        font-size: small;
+    }
+
+    p{
+        font-family: Roboto;
+        margin: 0 0 16px 0;
     }
 }
 

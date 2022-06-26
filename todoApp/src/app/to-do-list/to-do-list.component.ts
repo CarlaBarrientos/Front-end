@@ -12,7 +12,6 @@ type Task = {
 export class TodoListComponent implements OnInit {
     nuevaTarea: string = '';
     listaTareas: Task[] = [];
-    done: boolean = false;
 
     constructor() { }
     ngOnInit(): void {

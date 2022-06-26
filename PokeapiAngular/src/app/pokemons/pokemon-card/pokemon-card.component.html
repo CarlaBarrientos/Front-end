@@ -1,5 +1,10 @@
 <div class="pokemon-card" [ngStyle]="{'background-color': pokemonInformation.color}">
   <img src="{{pokemonInformation.image}}" class="pokemon-card_image">
+  <p class="pokemon-card_number" [ngStyle]="{'color': pokemonInformation.color === '#fbf6f6' 
+  || pokemonInformation.color === '#f0f060e6' 
+  || pokemonInformation.color === '#ffb6c3' 
+  ? 'black' : 'white' }">
+    {{pokemonInformation.id}}</p>
   <p class="pokemon-card_name" [ngStyle]="{'color': pokemonInformation.color === '#fbf6f6' 
       || pokemonInformation.color === '#f0f060e6' 
       || pokemonInformation.color === '#ffb6c3' 
