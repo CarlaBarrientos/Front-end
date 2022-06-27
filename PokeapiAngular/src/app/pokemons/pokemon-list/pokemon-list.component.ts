@@ -16,7 +16,7 @@ export class PokemonListComponent implements OnInit {
     ngOnInit() {
         this.getPokemons();
     }
-
+    
     getPokemons() {
         dataPokemons.results.map((pokemon, index) => {
             const id =  index + 1;
@@ -29,5 +29,18 @@ export class PokemonListComponent implements OnInit {
                 color: color
             })
         });
+    }
+
+    searchThis(data: string) {
+      if (data) {
+        this.listOfPokemons = [];
+        this.getPokemons();
+        this.listOfPokemons = this.listOfPokemons.filter((pokemon) => {
+          return pokemon.name.includes(data);
+        })
+      } else {
+        this.listOfPokemons = [];
+        this.getPokemons();
+      }
     }
 }
