@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { dataPokemons, pokemonColorMap, getPokemonImageUri } from '../../utils/utils';
 import { Pokemon } from '../../core/models/Pokemon';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
     selector: 'app-pokemon-list',
@@ -10,11 +11,22 @@ import { Pokemon } from '../../core/models/Pokemon';
 export class PokemonListComponent implements OnInit {
     
     listOfPokemons: Pokemon[] = [];
+    limit: number = 25;
+    offset: number = 0;
 
-    constructor() { }
+    constructor(private pokemonService: PokemonService) { }
 
     ngOnInit() {
-        this.getPokemons();
+      this.pokemonService.getPokemonList(this.offset, this.limit)
+      .subscribe(
+        (data: {results: Pokemon[]}) => { 
+          this.listOfPokemons = [...this.listOfPokemons, ...data.results]; 
+          console.log(data.results);
+        }
+      );
+      this.offset += this.limit;
+      console.log(this.listOfPokemons);
+      //this.getPokemons();
     }
     
     getPokemons() {
@@ -32,15 +44,12 @@ export class PokemonListComponent implements OnInit {
     }
 
     searchThis(data: string) {
+      this.listOfPokemons = [];
+      this.getPokemons();
       if (data) {
-        this.listOfPokemons = [];
-        this.getPokemons();
         this.listOfPokemons = this.listOfPokemons.filter((pokemon) => {
           return pokemon.name.includes(data);
         })
-      } else {
-        this.listOfPokemons = [];
-        this.getPokemons();
-      }
+      } 
     }
 }

@@ -4,6 +4,8 @@ import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { FormsModule } from '@angular/forms';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { CoreModule } from '../core/core.module';
+import { HttpClientModule } from '@angular/common/http';
+import { PokemonService } from './pokemon.service';
 
 @NgModule({
   declarations: [
@@ -13,9 +15,12 @@ import { CoreModule } from '../core/core.module';
   imports: [
     BrowserModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PokemonService
+  ],
   exports: [
     PokemonListComponent
   ]
