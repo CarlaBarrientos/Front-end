@@ -11,22 +11,23 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonListComponent implements OnInit {
     
     listOfPokemons: Pokemon[] = [];
+    filteredPokemons: Pokemon[] = [];
     limit: number = 25;
     offset: number = 0;
 
     constructor(private pokemonService: PokemonService) { }
 
     ngOnInit() {
-      this.pokemonService.getPokemonList(this.offset, this.limit)
-      .subscribe(
-        (data: {results: Pokemon[]}) => { 
-          this.listOfPokemons = [...this.listOfPokemons, ...data.results]; 
-          console.log(data.results);
-        }
-      );
-      this.offset += this.limit;
-      console.log(this.listOfPokemons);
-      //this.getPokemons();
+      // this.pokemonService.getPokemonList(this.offset, this.limit)
+      // .subscribe(
+      //   (data: {results: Pokemon[]}) => { 
+      //     this.listOfPokemons = [...this.listOfPokemons, ...data.results]; 
+      //     console.log(data.results);
+      //   }
+      // );
+      // this.offset += this.limit;
+      // console.log(this.listOfPokemons);
+      this.getPokemons();
     }
     
     getPokemons() {
@@ -39,17 +40,18 @@ export class PokemonListComponent implements OnInit {
                 name: pokemon.name,
                 image: image,
                 color: color
-            })
+            });
         });
+        this.filteredPokemons = [...this.listOfPokemons];
     }
 
-    searchThis(data: string) {
-      this.listOfPokemons = [];
-      this.getPokemons();
-      if (data) {
-        this.listOfPokemons = this.listOfPokemons.filter((pokemon) => {
-          return pokemon.name.includes(data);
-        })
-      } 
+    searchThis(searchCriteria: string) {
+      if (searchCriteria) {
+        this.filteredPokemons = this.listOfPokemons.filter((pokemon) => {
+          return pokemon.name.includes(searchCriteria);
+        });
+      } else {
+        this.filteredPokemons = [...this.listOfPokemons];
+      }
     }
 }

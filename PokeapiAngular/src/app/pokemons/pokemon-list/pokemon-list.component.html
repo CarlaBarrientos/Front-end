@@ -1,4 +1,4 @@
 <app-search-bar (searchcriteria)="searchThis($event)"></app-search-bar>
 <div class="container">
-  <app-pokemon-card *ngFor="let pokemon of listOfPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
+  <app-pokemon-card *ngFor="let pokemon of filteredPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
 </div>
