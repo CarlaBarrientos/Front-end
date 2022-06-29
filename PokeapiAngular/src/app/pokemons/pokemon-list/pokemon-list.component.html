@@ -1,4 +1,9 @@
-<app-search-bar (searchcriteria)="searchThis($event)"></app-search-bar>
-<div class="container">
-  <app-pokemon-card *ngFor="let pokemon of filteredPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
+<div class="main-container">
+  <div class="search-container">
+    <app-search-bar (searchCriteria)="searchThis($event)"></app-search-bar>
+  </div>
+  <div class="card-container">
+    <app-pokemon-card *ngFor="let pokemon of filteredPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
+    <div *ngIf="!filteredPokemons.length">Pokemon not found</div>
+  </div>
 </div>

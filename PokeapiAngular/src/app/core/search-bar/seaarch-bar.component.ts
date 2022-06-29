@@ -7,9 +7,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class SearchBarComponent { 
 
-    searchword: string = '';
-    @Output() searchcriteria = new EventEmitter<string>();
+    searchWord: string = '';
+    @Output() searchCriteria = new EventEmitter<string>();
+    
     search() {
-        this.searchcriteria.emit(this.searchword);
+        this.searchCriteria.emit(this.searchWord);
     }
 }

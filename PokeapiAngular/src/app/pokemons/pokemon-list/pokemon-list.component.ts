@@ -18,31 +18,26 @@ export class PokemonListComponent implements OnInit {
     constructor(private pokemonService: PokemonService) { }
 
     ngOnInit() {
-      // this.pokemonService.getPokemonList(this.offset, this.limit)
-      // .subscribe(
-      //   (data: {results: Pokemon[]}) => { 
-      //     this.listOfPokemons = [...this.listOfPokemons, ...data.results]; 
-      //     console.log(data.results);
-      //   }
-      // );
-      // this.offset += this.limit;
-      // console.log(this.listOfPokemons);
-      this.getPokemons();
+      this.pokemonService.getPokemonList(this.offset, this.limit)
+      .subscribe(
+        (pokemons: {results: { name: string, url: string }[]}) => { 
+          this.listOfPokemons = pokemons.results.map((pokemon) => this.fillPokemonInformation(pokemon)); 
+          this.filteredPokemons = this.listOfPokemons;
+        }
+      );
+      this.offset += this.limit;
     }
-    
-    getPokemons() {
-        dataPokemons.results.map((pokemon, index) => {
-            const id =  index + 1;
-            const image = getPokemonImageUri(id);
-            const color = pokemonColorMap[id];
-            this.listOfPokemons.push({
-                id: `#${id}`,
-                name: pokemon.name,
-                image: image,
-                color: color
-            });
-        });
-        this.filteredPokemons = [...this.listOfPokemons];
+
+    fillPokemonInformation(pokemon: { name: string, url: string }): Pokemon {
+      const pokemonId = this.pokemonService.getPokemonId(pokemon.url);
+      
+      return {
+        id: `#${pokemonId}`,
+        name: pokemon.name,
+        image: this.pokemonService.getPokemonImageUri(pokemonId),
+        color: this.pokemonService.getPokemonColor(Number(pokemonId).toString())
+      }
+
     }
 
     searchThis(searchCriteria: string) {
@@ -51,7 +46,7 @@ export class PokemonListComponent implements OnInit {
           return pokemon.name.includes(searchCriteria);
         });
       } else {
-        this.filteredPokemons = [...this.listOfPokemons];
+        this.filteredPokemons = this.listOfPokemons;
       }
     }
 }
