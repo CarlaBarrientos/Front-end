@@ -1,0 +1,7 @@
+<div class="pokemon-card" [ngStyle]="{'background-color': pokemonInformation.color}">
+  <img src="{{pokemonInformation.image}}" class="pokemon-card_image">
+  <p class="pokemon-card_number" [ngStyle]="{'color': setColorName() }">
+    {{pokemonInformation.id}}</p>
+  <p class="pokemon-card_name" [ngStyle]="{'color': setColorName() }">
+    {{pokemonInformation.name}}</p>
+</div>

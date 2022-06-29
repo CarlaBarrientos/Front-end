@@ -11,4 +11,12 @@ export class PokemonCardComponent {
     pokemonInformation!: Pokemon;
     
     constructor() { }
+
+    setColorName() {
+        if(['#fbf6f6', '#f0f060e6', '#ffb6c3'].includes(this.pokemonInformation.color)) {
+            return 'black';
+        } else {
+            return 'white'
+        }
+    }
 }
