@@ -6,6 +6,7 @@ import { PokemonCardComponent } from './pokemon-list/pokemon-card.component';
 import { CoreModule } from '../core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonService } from './pokemon.service';
+import { PokemonRoutingModule } from './pokemon-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PokemonService } from './pokemon.service';
     PokemonService
   ],
   exports: [
-    PokemonListComponent
+    PokemonListComponent,
+    PokemonRoutingModule
   ]
 })
 export class PokemonModule { }
