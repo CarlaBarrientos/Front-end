@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pokemon } from '../../core/models/Pokemon';
 
 @Component({
@@ -10,7 +11,7 @@ export class PokemonCardComponent {
     @Input()
     pokemonInformation!: Pokemon;
     
-    constructor() { }
+    constructor(private router: Router) { }
 
     setColorName() {
         if(['#fbf6f6', '#f0f060e6', '#ffb6c3'].includes(this.pokemonInformation.color)) {
@@ -18,5 +19,9 @@ export class PokemonCardComponent {
         } else {
             return 'white'
         }
+    }
+
+    redirectToProfile() {
+        this.router.navigate(['/pokedex/', this.pokemonInformation.id]);
     }
 }

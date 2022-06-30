@@ -1,4 +1,4 @@
-<div class="pokemon-card" [ngStyle]="{'background-color': pokemonInformation.color}">
+<div class="pokemon-card" [ngStyle]="{'background-color': pokemonInformation.color}" (click)="redirectToProfile()">
   <img src="{{pokemonInformation.image}}" class="pokemon-card_image">
   <p class="pokemon-card_number" [ngStyle]="{'color': setColorName() }">
     {{pokemonInformation.id}}</p>

@@ -7,11 +7,13 @@ import { CoreModule } from '../core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonService } from './pokemon.service';
 import { PokemonRoutingModule } from './pokemon-routing.module';
+import { PokemonProfileComponent } from './pokemon/profile/pokemon-profile.component';
 
 @NgModule({
   declarations: [
     PokemonListComponent,
-    PokemonCardComponent
+    PokemonCardComponent,
+    PokemonProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import { PokemonRoutingModule } from './pokemon-routing.module';
   ],
   exports: [
     PokemonListComponent,
+    PokemonProfileComponent,
     PokemonRoutingModule
   ]
 })
