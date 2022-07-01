@@ -4,6 +4,8 @@
   </div>
   <div class="card-container">
     <app-pokemon-card *ngFor="let pokemon of filteredPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
-    <div *ngIf="!filteredPokemons.length">Pokemon not found</div>
+    <div *ngIf="!filteredPokemons.length" class="not-found-image">
+      <img src="../../../assets/notfound.jpg" alt="">
+    </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-.searchbar {
+.searchinput {
     border: 1px solid rgb(177, 176, 176);
     border-radius: 20px;
     height: 24px;
@@ -10,4 +10,9 @@
         outline: none;
         border: 1px solid #555;
     }
+}
+
+.searchbar {
+
+    display: flex;
 }
