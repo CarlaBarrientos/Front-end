@@ -12,12 +12,16 @@ export class PokemonListComponent implements OnInit {
     
     listOfPokemons: Pokemon[] = [];
     filteredPokemons: Pokemon[] = [];
-    limit: number = 25;
+    limit: number = 50;
     offset: number = 0;
 
     constructor(private pokemonService: PokemonService) { }
 
     ngOnInit() {
+      this.getPokemons();
+    }
+
+    getPokemons() {
       this.pokemonService.getPokemonList(this.offset, this.limit)
       .subscribe(
         (pokemons: {results: { name: string, url: string }[]}) => { 
@@ -48,5 +52,10 @@ export class PokemonListComponent implements OnInit {
       } else {
         this.filteredPokemons = this.listOfPokemons;
       }
+    }
+
+    changeOffset(newOffset: number) {
+      this.offset = newOffset;
+      this.getPokemons();
     }
 }

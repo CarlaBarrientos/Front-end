@@ -1,3 +1,4 @@
 <div class="searchbar">
   <input class="searchinput" type="text" [(ngModel)]="searchWord" (ngModelChange)="search()" placeholder="Search">
+  <input class="searchinput" type="number" [(ngModel)]="offset" (blur) = 'onBlur()' placeholder="Offset">
 </div>
