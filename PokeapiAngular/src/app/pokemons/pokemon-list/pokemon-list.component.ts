@@ -10,7 +10,7 @@ import { PokemonService } from '../pokemon.service';
 })
 export class PokemonListComponent implements OnInit {
     
-    listOfPokemons: Pokemon[] = [];
+    pokemonList: Pokemon[] = [];
     filteredPokemons: Pokemon[] = [];
     limit: number = 50;
     offset: number = 0;
@@ -25,8 +25,8 @@ export class PokemonListComponent implements OnInit {
       this.pokemonService.getPokemonList(this.offset, this.limit)
       .subscribe(
         (pokemons: {results: { name: string, url: string }[]}) => { 
-          this.listOfPokemons = pokemons.results.map((pokemon) => this.fillPokemonInformation(pokemon)); 
-          this.filteredPokemons = this.listOfPokemons;
+          this.pokemonList = pokemons.results.map((pokemon) => this.fillPokemonInformation(pokemon)); 
+          this.filteredPokemons = this.pokemonList;
         }
       );
       this.offset += this.limit;
@@ -44,14 +44,8 @@ export class PokemonListComponent implements OnInit {
 
     }
 
-    searchThis(searchCriteria: string) {
-      if (searchCriteria) {
-        this.filteredPokemons = this.listOfPokemons.filter((pokemon) => {
-          return pokemon.name.includes(searchCriteria);
-        });
-      } else {
-        this.filteredPokemons = this.listOfPokemons;
-      }
+    searchThis(filteredPokemons: Pokemon[]) {
+        this.filteredPokemons = filteredPokemons;
     }
 
     changeOffset(newOffset: number) {
