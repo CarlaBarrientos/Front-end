@@ -18,30 +18,32 @@ export class PokemonProfileComponent implements OnInit {
         private pokemonService: PokemonService) { }
 
     async ngOnInit() {
-        this.pokemonId = this.route.snapshot.paramMap.get('id')!;
-        console.log(this.pokemonId)
-        this.pokemonService.getPokemonDescription(this.pokemonId)
-            .subscribe(
-                (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
-                    console.log(descriptions.flavor_text_entries[0]);
-                }
-            );
-        this.pokemonService.getPokemonInformation(this.pokemonId)
-            .subscribe((response: {
-                abilities: { ability: { name: string } }[], 
-                height: number, 
-                weight: number,
-                types: { type: { name: string } }[],
-                stats: { base_stat: number, stat: { name: string } }[]
-            }) => {
-                console.log(response.abilities);
-                console.log(response.height);
-                console.log(response.weight);
-                console.log(response.types);
-                console.log(response.stats);
-            });
-        const generation = this.pokemonService.getPokemonGeneration(this.pokemonId);
-        console.log(generation)
+        this.pokemonInformation = this.route.snapshot.data["pokemon"];
+        console.log(this.pokemonInformation)
+        // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
+        // console.log(this.pokemonId)
+        // this.pokemonService.getPokemonDescription(this.pokemonId)
+        //     .subscribe(
+        //         (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
+        //             console.log(descriptions.flavor_text_entries[0]);
+        //         }
+        //     );
+        // this.pokemonService.getPokemonInformation(this.pokemonId)
+        //     .subscribe((response: {
+        //         abilities: { ability: { name: string } }[], 
+        //         height: number, 
+        //         weight: number,
+        //         types: { type: { name: string } }[],
+        //         stats: { base_stat: number, stat: { name: string } }[]
+        //     }) => {
+        //         console.log(response.abilities);
+        //         console.log(response.height);
+        //         console.log(response.weight);
+        //         console.log(response.types);
+        //         console.log(response.stats);
+        //     });
+        // const generation = this.pokemonService.getPokemonGeneration(this.pokemonId);
+        // console.log(generation)
     }
 
     goBack() {

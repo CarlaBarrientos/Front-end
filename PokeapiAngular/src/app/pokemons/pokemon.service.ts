@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Pokemon } from "../core/models/Pokemon";
+import { PokemonInformation } from "../core/models/PokemonInformation";
 import { pokemonColorMap } from "../utils/utils";
 
 @Injectable({
@@ -37,14 +38,15 @@ export class PokemonService {
     }
 
     getPokemonInformation(name: string) {
-        return this.http.get(`${this.API}/pokemon/${name}`) as Observable<{
-            abilities: { ability: { name: string } }[],
-            height: number,
-            weight: number,
-            types: { type: { name: string } }[],
-            stats: { base_stat: number, stat: { name: string } }[]
-        }
-        >;
+        return this.http.get(`${this.API}/pokemon/${name}`) as Observable<PokemonInformation>;
+        // return this.http.get(`${this.API}/pokemon/${name}`) as Observable<{
+        //     abilities: { ability: { name: string } }[],
+        //     height: number,
+        //     weight: number,
+        //     types: { type: { name: string } }[],
+        //     stats: { base_stat: number, stat: { name: string } }[]
+        // }
+        // >;
     }
 
     getGenerations() {
