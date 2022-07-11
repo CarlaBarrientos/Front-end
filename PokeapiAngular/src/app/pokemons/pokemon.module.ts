@@ -7,19 +7,26 @@ import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokemonProfileComponent } from './pokemon/profile/pokemon-profile.component';
 import { CommonModule } from '@angular/common';
 import { DescriptionCardComponent } from './pokemon/profile/components/description-card.component';
+import { StatsCardComponent } from './pokemon/profile/components/stats-card.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 @NgModule({
   declarations: [
     PokemonListComponent,
     PokemonCardComponent,
     PokemonProfileComponent,
-    DescriptionCardComponent
+    DescriptionCardComponent,
+    StatsCardComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     CoreModule,
-    PokemonRoutingModule
+    PokemonRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [],
   exports: []
