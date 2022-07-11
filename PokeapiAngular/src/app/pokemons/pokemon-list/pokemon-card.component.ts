@@ -22,6 +22,6 @@ export class PokemonCardComponent {
     }
 
     redirectToProfile() {
-        this.router.navigate(['/pokedex/', this.pokemonInformation.name]);
+        this.router.navigate(['/pokedex/', this.pokemonInformation.id]);
     }
 }

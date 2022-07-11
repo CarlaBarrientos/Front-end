@@ -11,6 +11,6 @@ export class PokemonResolver implements Resolve<PokemonInformation> {
     constructor(private pokemonService: PokemonService){ }
 
     resolve(route: ActivatedRouteSnapshot): Observable<PokemonInformation> | Promise<PokemonInformation> | PokemonInformation {
-        return this.pokemonService.getPokemonInformation(route.paramMap.get('id') || '1');
+        return this.pokemonService.getPokemonInformation(route.paramMap.get('id')?.slice(1) || '1');
     }
 }

@@ -6,7 +6,7 @@ import { PokemonInformation } from 'src/app/core/models/PokemonInformation';
 @Component({
     selector: 'app-pokemon-profile',
     templateUrl: './pokemon-profile.component.html',
-    styleUrls: []
+    styleUrls: ['./pokemon-profile.component.scss']
 })
 export class PokemonProfileComponent implements OnInit {
 
