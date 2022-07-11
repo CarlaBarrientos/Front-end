@@ -1,0 +1,20 @@
+<div>
+  <div style="float: left; width: 50%;">
+    <ul>
+      <h1>Height</h1>
+      <h3>{{height}}</h3>
+    </ul>
+    <ul>
+      <h1>Weight</h1>
+      <h3>{{weight}}</h3>
+    </ul>
+  </div>
+  <div style="float: right; width: 50%;">
+    <ul>
+      <h1>Abilities</h1>
+      <li *ngFor="let ability of abilities">
+        <h3>{{ability}}</h3>
+      </li>
+    </ul>
+  </div>
+</div>

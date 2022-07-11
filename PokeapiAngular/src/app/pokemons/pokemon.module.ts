@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { DescriptionCardComponent } from './pokemon/profile/components/description-card.component';
 import { StatsCardComponent } from './pokemon/profile/components/stats-card.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { GeneralInformationComponent } from './pokemon/profile/components/general-information-card.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     PokemonCardComponent,
     PokemonProfileComponent,
     DescriptionCardComponent,
-    StatsCardComponent
+    StatsCardComponent,
+    GeneralInformationComponent
   ],
   imports: [
     CommonModule,
