@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-description-card',
@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class DescriptionCardComponent {
 
+    @Input() description!: string;
     constructor() { }
-
 }

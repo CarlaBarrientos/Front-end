@@ -19,7 +19,11 @@ export class PokemonProfileComponent implements OnInit {
 
     async ngOnInit() {
         this.pokemonInformation = this.route.snapshot.data["pokemon"];
-        console.log(this.pokemonInformation)
+        this.pokemonService.getPokemonDescription(this.pokemonInformation.id).subscribe(
+            (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
+                this.pokemonInformation.description = descriptions.flavor_text_entries[0].flavor_text;
+            }
+        );
         // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
         // console.log(this.pokemonId)
         // this.pokemonService.getPokemonDescription(this.pokemonId)
