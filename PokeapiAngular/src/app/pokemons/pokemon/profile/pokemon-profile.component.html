@@ -2,7 +2,9 @@
     <h1>Pokemon profile</h1>
     <button (click)="goBack()">Go Back</button>
     <div class="container">
-        <div class="image card"></div>
+        <div class="image card">
+            <img src="{{pokemonInformation.image}}">
+        </div>
         <div class="description card">
             <app-description-card [description]="pokemonInformation.description"></app-description-card>
         </div>
