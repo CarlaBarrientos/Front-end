@@ -21,7 +21,6 @@ export class GeneralInformationComponent implements OnInit{
         this.abilities = this.pokemonInfo.abilities.map((ability: any) => {
             return ability.ability.name;
         });
-        console.log(this.abilities);
     }
 
 }

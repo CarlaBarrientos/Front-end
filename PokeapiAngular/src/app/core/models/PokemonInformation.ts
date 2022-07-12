@@ -7,6 +7,6 @@ export interface PokemonInformation extends Pokemon {
     weight: string,
     gender: string[],
     abilities: string[],
-    type: string[],
+    types: string[],
     stats: string[]
 }

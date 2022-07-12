@@ -10,6 +10,7 @@ import { DescriptionCardComponent } from './pokemon/profile/components/descripti
 import { StatsCardComponent } from './pokemon/profile/components/stats-card.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { GeneralInformationComponent } from './pokemon/profile/components/general-information-card.component';
+import { TypeCardComponent } from './pokemon/profile/components/type-card.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { GeneralInformationComponent } from './pokemon/profile/components/genera
     PokemonProfileComponent,
     DescriptionCardComponent,
     StatsCardComponent,
-    GeneralInformationComponent
+    GeneralInformationComponent,
+    TypeCardComponent
   ],
   imports: [
     CommonModule,

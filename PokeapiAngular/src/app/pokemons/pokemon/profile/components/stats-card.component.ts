@@ -31,6 +31,7 @@ export class StatsCardComponent implements OnInit {
             xAxis: {
                 type: 'category',
                 data: this.categories,
+                axisLabel: { interval: 0, rotate: 35 }
             },
             yAxis: {
                 type: 'value',
