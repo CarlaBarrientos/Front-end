@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonCardComponent } from './pokemon-list/pokemon-card.component';
 import { CoreModule } from '../core/core.module';
 import { PokemonRoutingModule } from './pokemon-routing.module';
@@ -11,6 +11,7 @@ import { StatsCardComponent } from './pokemon/profile/components/stats-card.comp
 import { NgxEchartsModule } from 'ngx-echarts';
 import { GeneralInformationComponent } from './pokemon/profile/components/general-information-card.component';
 import { TypeCardComponent } from './pokemon/profile/components/type-card.component';
+import { PokemonAddComponent } from './pokemon/add/pokemon-add.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TypeCardComponent } from './pokemon/profile/components/type-card.compon
     DescriptionCardComponent,
     StatsCardComponent,
     GeneralInformationComponent,
-    TypeCardComponent
+    TypeCardComponent,
+    PokemonAddComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { TypeCardComponent } from './pokemon/profile/components/type-card.compon
     PokemonRoutingModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    ReactiveFormsModule
   ],
   providers: [],
   exports: []

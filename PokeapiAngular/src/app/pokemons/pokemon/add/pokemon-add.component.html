@@ -1,0 +1,28 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h2>Basic Information</h2>
+    <div>
+        <label>Name</label>
+        <input type="text" formControlName="name">
+    </div>
+    <div>
+        <label>Description</label>
+        <input type="text" formControlName="description">
+    </div>
+    <div>
+        <label>Image URL</label>
+        <input type="text" formControlName="image">
+    </div>
+    <div>
+        <label>Color</label>
+        <input type="text" formControlName="color">
+    </div>
+    <div>
+        <label>Height</label>
+        <input type="text" formControlName="height">
+    </div>
+    <div>
+        <label>Weight</label>
+        <input type="text" formControlName="weight">
+    </div>
+    <button type="submit">Add Pokemon</button>
+</form>
