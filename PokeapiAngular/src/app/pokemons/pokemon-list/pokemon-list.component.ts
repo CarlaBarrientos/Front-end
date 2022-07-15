@@ -21,20 +21,18 @@ export class PokemonListComponent implements OnInit {
 
     ngOnInit() {
       const pokemons = this.router.snapshot.data["pokemons"];
-      this.getPokemons(pokemons);
-    }
-
-    getPokemons(pokemons: {results: { name: string, url: string }[]}) {
-      
       this.pokemonList = pokemons.results.map((pokemon: { name: string, url: string }) => this.fillPokemonInformation(pokemon)); 
       this.filteredPokemons = this.pokemonList;
-      // this.pokemonService.getPokemonList(this.offset, this.limit)
-      // .subscribe(
-      //   (pokemons: {results: { name: string, url: string }[]}) => { 
-      //     this.pokemonList = pokemons.results.map((pokemon) => this.fillPokemonInformation(pokemon)); 
-      //     this.filteredPokemons = this.pokemonList;
-      //   }
-      // );
+    }
+
+    getPokemons() {
+      this.pokemonService.getPokemonList(this.offset, this.limit)
+      .subscribe(
+        (pokemons: {results: { name: string, url: string }[]}) => { 
+          this.pokemonList = pokemons.results.map((pokemon) => this.fillPokemonInformation(pokemon)); 
+          this.filteredPokemons = this.pokemonList;
+        }
+      );
       this.offset += this.limit;
     }
 
@@ -56,6 +54,6 @@ export class PokemonListComponent implements OnInit {
 
     changeOffset(newOffset: number) {
       this.offset = newOffset;
-      this.getPokemons(this.router.snapshot.data["pokemons"]);
+      this.getPokemons();
     }
 }

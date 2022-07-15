@@ -22,7 +22,7 @@ export class PokemonProfileComponent implements OnInit {
         console.log(this.pokemonInformation)
         this.pokemonService.getPokemonDescription(this.pokemonInformation.id).subscribe(
             (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
-                this.pokemonInformation.description = descriptions.flavor_text_entries[0].flavor_text;
+                this.pokemonInformation.description = descriptions.flavor_text_entries[0].flavor_text.trim();
             }
         );
         this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
