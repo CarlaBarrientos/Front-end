@@ -16,4 +16,11 @@ export class EvolutionCardComponent implements OnInit{
     ngOnInit(): void { 
         console.log(this.evolutions);
     }
+
+    redirectToProfile(pokemonId: string) {
+        this.router.navigate(['/pokedex/', `#${pokemonId}`])
+        .then(() => {
+          window.location.reload();
+        });
+    }
 }

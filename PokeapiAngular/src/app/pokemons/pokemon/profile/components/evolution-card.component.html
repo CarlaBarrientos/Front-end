@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card" *ngFor="let evolution of evolutions">
+    <div class="card" *ngFor="let evolution of evolutions" (click)="redirectToProfile(evolution.id)">
         <img src="{{evolution.image}}">
         <label class="card_name">{{evolution.name}}</label>
     </div>

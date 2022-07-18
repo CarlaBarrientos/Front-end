@@ -19,7 +19,8 @@ export class PokemonProfileComponent implements OnInit {
 
     async ngOnInit() {
         console.log(this.route.snapshot.data["pokemon"])
-        this.pokemonInformation = this.route.snapshot.data["pokemon"];
+        //this.route.params.subscribe(routeParams => {
+            this.pokemonInformation = this.route.snapshot.data["pokemon"];
         this.pokemonInformation.evolution = [];
         this.pokemonService.getPokemonSpecies(this.pokemonInformation.id).subscribe(
             (specie: { flavor_text_entries: { flavor_text: string }[], evolution_chain: { url: string } }) => {
@@ -47,7 +48,7 @@ export class PokemonProfileComponent implements OnInit {
         );
         this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
         console.log(this.pokemonInformation);
-
+        //});
         // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
         // console.log(this.pokemonId)
         // this.pokemonService.getPokemonDescription(this.pokemonId)
