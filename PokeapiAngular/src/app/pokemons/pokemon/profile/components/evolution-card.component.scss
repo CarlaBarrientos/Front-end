@@ -1,0 +1,19 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &_name {
+        font-family: Roboto;
+        text-transform: capitalize;
+        margin: 0 0 16px 0;
+    }
+}

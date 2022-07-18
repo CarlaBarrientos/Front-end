@@ -18,14 +18,36 @@ export class PokemonProfileComponent implements OnInit {
         private pokemonService: PokemonService) { }
 
     async ngOnInit() {
+        console.log(this.route.snapshot.data["pokemon"])
         this.pokemonInformation = this.route.snapshot.data["pokemon"];
-        console.log(this.pokemonInformation)
-        this.pokemonService.getPokemonDescription(this.pokemonInformation.id).subscribe(
-            (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
-                this.pokemonInformation.description = descriptions.flavor_text_entries[0].flavor_text.trim();
+        this.pokemonInformation.evolution = [];
+        this.pokemonService.getPokemonSpecies(this.pokemonInformation.id).subscribe(
+            (specie: { flavor_text_entries: { flavor_text: string }[], evolution_chain: { url: string } }) => {
+                this.pokemonInformation.description = specie.flavor_text_entries[0].flavor_text.trim();
+                this.pokemonInformation.evolutionUrl = specie.evolution_chain.url;
+                this.pokemonService.getPokemonEvolution(this.pokemonInformation.evolutionUrl).subscribe(
+                    (results: any) => {
+                        var evoData = results.chain;
+
+                        do {
+                            var evoDetails = evoData['evolution_details'][0];
+                            const id = this.pokemonService.getPokemonId(evoData.species.url);
+                            this.pokemonInformation.evolution.push({
+                                id: this.pokemonService.getPokemonId(evoData.species.url as string),
+                                name: evoData.species.name as string,
+                                url: evoData.species.url as string,
+                                image: this.pokemonService.getPokemonImageUri(id)
+                            });
+
+                            evoData = evoData['evolves_to'][0];
+                        } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
+                    }
+                );
             }
         );
         this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
+        console.log(this.pokemonInformation);
+
         // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
         // console.log(this.pokemonId)
         // this.pokemonService.getPokemonDescription(this.pokemonId)

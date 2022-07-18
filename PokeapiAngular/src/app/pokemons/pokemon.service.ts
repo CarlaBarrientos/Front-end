@@ -18,7 +18,7 @@ export class PokemonService {
             .get(`${this.API}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{ results: { name: string, url: string }[] }>;
     }
 
-    getPokemonImageUri(id: string) {
+    getPokemonImageUri(id: string): string {
         const parseId = ('00' + id).slice(-3)
         return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${parseId}.png`;
     }
@@ -33,12 +33,15 @@ export class PokemonService {
         return id;
     }
 
-    getPokemonDescription(name: string) {
-        return this.http.get(`${this.API}/pokemon-species/${name}`) as Observable<{ flavor_text_entries: { flavor_text: string }[] }>;
+    getPokemonSpecies(id: string) {
+        return this.http.get(`${this.API}/pokemon-species/${id}`) as Observable<{
+            flavor_text_entries: { flavor_text: string }[],
+            evolution_chain: { url: string }
+        }>;
     }
 
-    getPokemonInformation(name: string) {
-        return this.http.get(`${this.API}/pokemon/${name}`) as Observable<PokemonInformation>;
+    getPokemonInformation(id: string) {
+        return this.http.get(`${this.API}/pokemon/${id}`) as Observable<PokemonInformation>;
         // return this.http.get(`${this.API}/pokemon/${name}`) as Observable<{
         //     abilities: { ability: { name: string } }[],
         //     height: number,
@@ -47,6 +50,21 @@ export class PokemonService {
         //     stats: { base_stat: number, stat: { name: string } }[]
         // }
         // >;
+    }
+
+    getPokemonEvolution(url: string) {
+        console.log(url)
+        return this.http.get(url) as Observable<{
+            chain: {
+                evolves_to: {
+                    evolves_to: {
+                        species: { name: string, url: string }
+                    },
+                    species: { name: string, url: string }
+                }
+            },
+            species: { name: string, url: string }
+        }>;
     }
 
     getGenerations() {
@@ -65,7 +83,7 @@ export class PokemonService {
                     this.getPokemonsByGeneration(generation.name)
                         .subscribe((pokemons) => {
                             pokemons.pokemon_species.forEach((pokemon) => {
-                                if(pokemon.name.includes(name.toLowerCase())){
+                                if (pokemon.name.includes(name.toLowerCase())) {
                                     return generation.name;
                                 } else {
                                     return '';
