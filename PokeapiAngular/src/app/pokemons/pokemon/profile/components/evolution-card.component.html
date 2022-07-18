@@ -1,6 +1,9 @@
 <div class="container">
-    <div class="card" *ngFor="let evolution of evolutions" (click)="redirectToProfile(evolution.id)">
-        <img src="{{evolution.image}}">
-        <label class="card_name">{{evolution.name}}</label>
+    <div class="card_container" *ngFor="let evolution of evolutions; let i = index" (click)="redirectToProfile(evolution.id)">
+        <div class="card">
+            <img src="{{evolution.image}}">
+            <label class="card_name">{{evolution.name}}</label>
+        </div>
+        <mat-icon *ngIf="i < evolutions.length - 1">keyboard_arrow_right</mat-icon>
     </div>
 </div>

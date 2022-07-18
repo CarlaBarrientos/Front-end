@@ -6,6 +6,14 @@
     align-items: center;
 }
 
+.card_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -16,4 +24,10 @@
         text-transform: capitalize;
         margin: 0 0 16px 0;
     }
+}
+
+.mat-icon {
+    font-size: 100px;
+    width: fit-content;
+    height: auto;
 }

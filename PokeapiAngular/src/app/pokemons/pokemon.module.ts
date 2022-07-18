@@ -13,6 +13,7 @@ import { GeneralInformationComponent } from './pokemon/profile/components/genera
 import { TypeCardComponent } from './pokemon/profile/components/type-card.component';
 import { PokemonAddComponent } from './pokemon/add/pokemon-add.component';
 import { EvolutionCardComponent } from './pokemon/profile/components/evolution-card.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { EvolutionCardComponent } from './pokemon/profile/components/evolution-c
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   exports: []
