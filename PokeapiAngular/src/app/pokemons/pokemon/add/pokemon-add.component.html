@@ -1,28 +1,58 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <h2>Basic Information</h2>
-    <div>
-        <label>Name</label>
-        <input type="text" formControlName="name">
-    </div>
-    <div>
-        <label>Description</label>
-        <input type="text" formControlName="description">
-    </div>
-    <div>
-        <label>Image URL</label>
-        <input type="text" formControlName="image">
-    </div>
-    <div>
-        <label>Color</label>
-        <input type="text" formControlName="color">
-    </div>
-    <div>
-        <label>Height</label>
-        <input type="text" formControlName="height">
-    </div>
-    <div>
-        <label>Weight</label>
-        <input type="text" formControlName="weight">
-    </div>
-    <button type="submit">Add Pokemon</button>
-</form>
+<div class="form-container">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form">
+        <h2>Pokemon Information</h2>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Color</mat-label>
+                <input matInput formControlName="color">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Height</mat-label>
+                <input matInput formControlName="height">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Weight</mat-label>
+                <input matInput formControlName="weight">
+            </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Image</mat-label>
+            <input matInput formControlName="image">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Generation</mat-label>
+            <mat-select formControlName="generation">
+                <mat-option *ngFor="let generation of generations" value={{generation}}>{{generation}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Abilities</mat-label>
+            <mat-select formControlName="abilities">
+                <mat-option *ngFor="let ability of abilities" value={{ability}}>{{ability}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Types</mat-label>
+            <mat-select formControlName="types">
+                <mat-option *ngFor="let type of pokemonTypes" value={{type}}>{{type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Stats</mat-label>
+            <mat-select formControlName="stats">
+                <mat-option *ngFor="let stat of stats" value={{stat}}>{{stat}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Add Pokemon</button>
+    </form>
+</div>

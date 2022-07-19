@@ -14,30 +14,42 @@ import { TypeCardComponent } from './pokemon/profile/components/type-card.compon
 import { PokemonAddComponent } from './pokemon/add/pokemon-add.component';
 import { EvolutionCardComponent } from './pokemon/profile/components/evolution-card.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
-
+const materialModules = [
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+];
 @NgModule({
   declarations: [
-    PokemonListComponent,
-    PokemonCardComponent,
-    PokemonProfileComponent,
     DescriptionCardComponent,
-    StatsCardComponent,
+    EvolutionCardComponent,
     GeneralInformationComponent,
-    TypeCardComponent,
     PokemonAddComponent,
-    EvolutionCardComponent
+    PokemonCardComponent,
+    PokemonListComponent,
+    PokemonProfileComponent,
+    StatsCardComponent,
+    TypeCardComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
     CoreModule,
-    PokemonRoutingModule,
+    FormsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
+    PokemonRoutingModule,
     ReactiveFormsModule,
-    MatIconModule
+    ...materialModules
   ],
   providers: [],
   exports: []

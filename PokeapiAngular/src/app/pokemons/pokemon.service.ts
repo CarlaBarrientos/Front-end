@@ -67,10 +67,6 @@ export class PokemonService {
         }>;
     }
 
-    getGenerations() {
-        return this.http.get(`${this.API}/generation`) as Observable<{ results: { name: string }[] }>;
-    }
-
     getPokemonsByGeneration(generationName: string) {
         return this.http.get(`${this.API}/generation/${generationName}`) as Observable<{ pokemon_species: { name: string }[] }>;
     }
@@ -92,6 +88,22 @@ export class PokemonService {
                         })
                 })
             })
+    }
+
+    getGenerations() {
+        return this.http.get(`${this.API}/generation`) as Observable<{ results: { name: string }[] }>;
+    }
+
+    getAbilities() {
+        return this.http.get(`${this.API}/ability`) as Observable<{ results: { name: string }[] }>;
+    }
+
+    getTypes() {
+        return this.http.get(`${this.API}/type`) as Observable<{ results: { name: string }[] }>;
+    }
+
+    getStats() {
+        return this.http.get(`${this.API}/stat`) as Observable<{ results: { name: string }[] }>;
     }
 
 }
