@@ -1,10 +1,8 @@
 <div class="main-container">
-  <div class="search-container">
-    <app-search-bar [list]="pokemonList" [searchField]="'name'" (filteredList)="searchThis($event)" (changeOffset)="changeOffset($event)"></app-search-bar>
-  </div>
+  <app-filters (pokemons)="setPokemons($event)"></app-filters>
   <div class="card-container">
-    <app-pokemon-card *ngFor="let pokemon of filteredPokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
-    <div *ngIf="!filteredPokemons.length" class="not-found-image">
+    <app-pokemon-card *ngFor="let pokemon of pokemons" [pokemonInformation]="pokemon"></app-pokemon-card>
+    <div *ngIf="!pokemons.length" class="not-found-image">
       <img src="../../../assets/notfound.jpg" alt="">
     </div>
   </div>

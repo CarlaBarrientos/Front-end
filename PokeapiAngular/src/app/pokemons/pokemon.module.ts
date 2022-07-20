@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { FiltersComponent } from './pokemon-list/filters.component';
 
 const materialModules = [
   MatButtonModule,
@@ -32,6 +33,7 @@ const materialModules = [
   declarations: [
     DescriptionCardComponent,
     EvolutionCardComponent,
+    FiltersComponent,
     GeneralInformationComponent,
     PokemonAddComponent,
     PokemonCardComponent,
