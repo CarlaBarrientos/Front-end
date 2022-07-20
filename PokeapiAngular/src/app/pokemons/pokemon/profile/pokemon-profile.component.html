@@ -1,6 +1,10 @@
 <div>
-    <button (click)="goBack()">Go Back</button>
-    <h1 class="title">#{{pokemonInformation.id}}  {{pokemonInformation.name}}</h1>
+    <div class="title-container">
+        <button mat-fab color="primary" (click)="goBack()" class="return-button">
+            <mat-icon>reply</mat-icon>
+        </button>
+        <h1 class="title">#{{pokemonInformation.id}} {{pokemonInformation.name}}</h1>
+    </div>
     <div class="container">
         <div class="image card">
             <img src="{{pokemonInformation.image}}">

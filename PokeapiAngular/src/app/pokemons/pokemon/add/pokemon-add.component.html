@@ -32,25 +32,25 @@
         <mat-form-field appearance="outline">
             <mat-label>Generation</mat-label>
             <mat-select formControlName="generation">
-                <mat-option *ngFor="let generation of generations" value={{generation}}>{{generation}}</mat-option>
+                <mat-option *ngFor="let generation of generations" value={{generation}} class="capitalize">{{generation}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Abilities</mat-label>
-            <mat-select formControlName="abilities">
-                <mat-option *ngFor="let ability of abilities" value={{ability}}>{{ability}}</mat-option>
+            <mat-select formControlName="abilities" multiple>
+                <mat-option *ngFor="let ability of abilities" value={{ability}} class="capitalize">{{ability}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Types</mat-label>
-            <mat-select formControlName="types">
-                <mat-option *ngFor="let type of pokemonTypes" value={{type}}>{{type}}</mat-option>
+            <mat-select formControlName="types" multiple>
+                <mat-option *ngFor="let type of pokemonTypes" value={{type}} class="capitalize">{{type}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Stats</mat-label>
-            <mat-select formControlName="stats">
-                <mat-option *ngFor="let stat of stats" value={{stat}}>{{stat}}</mat-option>
+            <mat-select formControlName="stats" multiple>
+                <mat-option *ngFor="let stat of stats" value={{stat}} class="capitalize">{{stat}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Add Pokemon</button>
