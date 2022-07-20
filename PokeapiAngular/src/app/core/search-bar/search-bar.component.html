@@ -1,4 +1,6 @@
 <div class="searchbar">
-  <input class="searchinput" type="text" [(ngModel)]="searchWord" (ngModelChange)="search()" placeholder="Search">
-  <input class="searchinput" type="number" [(ngModel)]="offset" (blur) = 'onBlur()' placeholder="Offset">
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" [(ngModel)]="searchWord" (ngModelChange)="search()">
+  </mat-form-field>
 </div>

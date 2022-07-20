@@ -1,5 +1,26 @@
 <div>
     <div class="search-container">
-        <app-search-bar [list]="pokemonList" [searchField]="'name'" (filteredList)="searchThis($event)" (changeOffset)="changeOffset($event)"></app-search-bar>
-      </div>
+        <app-search-bar [list]="pokemonList" [searchField]="'name'" (filteredList)="searchThis($event)"></app-search-bar>
+        <mat-form-field appearance="outline">
+            <mat-label>Offset</mat-label>
+            <input matInput type="number" [(ngModel)]="offset" (blur) = 'changeOffsetOrLimit()'>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Limit</mat-label>
+            <input matInput type="number" [(ngModel)]="limit" (blur) = 'changeOffsetOrLimit()'>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Generation</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let generation of generations" value={{generation}}>{{generation}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Order Alphabetically</mat-label>
+            <mat-select>
+                <mat-option value='upward'>A-Z</mat-option>
+                <mat-option value='falling'>Z-A</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 </div>

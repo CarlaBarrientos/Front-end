@@ -14,6 +14,8 @@ export class FiltersComponent implements OnInit {
     filteredPokemons: Pokemon[] = [];
     limit: number = 50;
     offset: number = 0;
+    generations: string[] = [];
+
     @Output() pokemons = new EventEmitter<Pokemon[]>();
 
     constructor(private pokemonService: PokemonService,
@@ -24,6 +26,7 @@ export class FiltersComponent implements OnInit {
         this.pokemonList = pokemons.results.map((pokemon: { name: string, url: string }) => this.fillPokemonInformation(pokemon));
         this.filteredPokemons = this.pokemonList;
         this.sendPokemons(this.filteredPokemons);
+        this.fillGenerations();
     }
 
     getPokemons() {
@@ -35,7 +38,6 @@ export class FiltersComponent implements OnInit {
                     this.sendPokemons(this.filteredPokemons);
                 }
             );
-        this.offset += this.limit;
     }
 
     fillPokemonInformation(pokemon: { name: string, url: string }): Pokemon {
@@ -55,13 +57,20 @@ export class FiltersComponent implements OnInit {
         this.sendPokemons(this.filteredPokemons);
     }
 
-    changeOffset(newOffset: number) {
-        this.offset = newOffset;
+    changeOffsetOrLimit() {
         this.getPokemons();
     }
 
     sendPokemons(value: Pokemon[]) {
         this.pokemons.emit(value);
+    }
+
+    fillGenerations() {
+        this.pokemonService.getGenerations().subscribe((generations: { results: { name: string }[]} ) => {
+            generations.results.forEach(generation => {
+                this.generations.push(generation.name)
+            });
+        });
     }
 
 }
