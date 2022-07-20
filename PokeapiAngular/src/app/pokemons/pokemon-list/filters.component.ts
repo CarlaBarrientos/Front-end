@@ -15,6 +15,8 @@ export class FiltersComponent implements OnInit {
     limit: number = 50;
     offset: number = 0;
     generations: string[] = [];
+    selectedGeneration: string = '';
+    selectedOption: string = '';
 
     @Output() pokemons = new EventEmitter<Pokemon[]>();
 
@@ -58,7 +60,11 @@ export class FiltersComponent implements OnInit {
     }
 
     changeOffsetOrLimit() {
-        this.getPokemons();
+        if (this.selectedGeneration !== '') {
+            this.getPokemonsByGeneration(this.selectedGeneration)
+        } else {
+            this.getPokemons();
+        }
     }
 
     sendPokemons(value: Pokemon[]) {
@@ -75,9 +81,27 @@ export class FiltersComponent implements OnInit {
 
     orderAlphabetically(value: string) {
         this.filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
-        if(value === 'falling') {
+        if (value === 'falling') {
             this.filteredPokemons.reverse();
         }
+    }
+
+    getPokemonsByGeneration(generation: string) {
+        this.pokemonService.getPokemonsByGeneration(generation).subscribe((pokemons: { pokemon_species: { name: string, url: string }[] }) => {
+            if(!this.limit) {
+                this.limit = 50;
+            }
+            if(!this.offset) {
+                this.offset = 0;
+            }
+            const limitedPokemons = pokemons.pokemon_species.slice(this.offset, this.limit);
+            this.pokemonList = limitedPokemons.map((pokemon) => this.fillPokemonInformation(pokemon));
+            this.filteredPokemons = this.pokemonList;
+            if (this.selectedOption !== '') {
+                this.orderAlphabetically(this.selectedOption);
+            }
+            this.sendPokemons(this.filteredPokemons);
+        });
     }
 
 }

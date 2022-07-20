@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Pokemon } from "../core/models/Pokemon";
 import { PokemonInformation } from "../core/models/PokemonInformation";
 import { pokemonColorMap } from "../utils/utils";
 
@@ -53,7 +52,6 @@ export class PokemonService {
     }
 
     getPokemonEvolution(url: string) {
-        console.log(url)
         return this.http.get(url) as Observable<{
             chain: {
                 evolves_to: {
@@ -68,26 +66,7 @@ export class PokemonService {
     }
 
     getPokemonsByGeneration(generationName: string) {
-        return this.http.get(`${this.API}/generation/${generationName}`) as Observable<{ pokemon_species: { name: string }[] }>;
-    }
-
-    getPokemonGeneration(name: string) {
-        this.getGenerations()
-            .subscribe((response: { results: { name: string }[] }) => {
-                console.log(response.results);
-                response.results.forEach((generation) => {
-                    this.getPokemonsByGeneration(generation.name)
-                        .subscribe((pokemons) => {
-                            pokemons.pokemon_species.forEach((pokemon) => {
-                                if (pokemon.name.includes(name.toLowerCase())) {
-                                    return generation.name;
-                                } else {
-                                    return '';
-                                }
-                            })
-                        })
-                })
-            })
+        return this.http.get(`${this.API}/generation/${generationName}`) as Observable<{ pokemon_species: { name: string, url: string }[] }>;
     }
 
     getGenerations() {
