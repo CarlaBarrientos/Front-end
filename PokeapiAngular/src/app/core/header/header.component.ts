@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-    constructor() { }
+    constructor(private router: Router) { }
 
+    goToPokedex(){
+        this.router.navigateByUrl('/pokedex');
+    }
+
+    goToHome(){
+        this.router.navigateByUrl('');
+    }
+
+    goToAddPokemon(){
+        this.router.navigateByUrl('/pokedex/add');
+    }
 }

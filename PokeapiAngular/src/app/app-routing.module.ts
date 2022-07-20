@@ -3,9 +3,10 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
     {
-        path: '',
-        loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
-    }
+        path: 'pokedex',
+        loadChildren: () => import('./pokemons/pokemon.module').then(m => m.PokemonModule)
+    },
+    { path: '', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
