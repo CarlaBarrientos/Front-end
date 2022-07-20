@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { PokemonInformation } from 'src/app/core/models/PokemonInformation';
 @Component({
@@ -13,14 +12,13 @@ export class PokemonProfileComponent implements OnInit {
     pokemonId!: string;
     pokemonInformation!: PokemonInformation;
 
-    constructor(private location: Location,
-        private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
+        private router: Router,
         private pokemonService: PokemonService) { }
 
     async ngOnInit() {
-        console.log(this.route.snapshot.data["pokemon"])
         //this.route.params.subscribe(routeParams => {
-            this.pokemonInformation = this.route.snapshot.data["pokemon"];
+        this.pokemonInformation = this.route.snapshot.data["pokemon"];
         this.pokemonInformation.evolution = [];
         this.pokemonService.getPokemonSpecies(this.pokemonInformation.id).subscribe(
             (specie: { flavor_text_entries: { flavor_text: string }[], evolution_chain: { url: string } }) => {
@@ -47,7 +45,6 @@ export class PokemonProfileComponent implements OnInit {
             }
         );
         this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
-        console.log(this.pokemonInformation);
         //});
         // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
         // console.log(this.pokemonId)
@@ -76,7 +73,7 @@ export class PokemonProfileComponent implements OnInit {
     }
 
     goBack() {
-        this.location.back();
+        this.router.navigate(['/pokedex']);
     }
 
 }

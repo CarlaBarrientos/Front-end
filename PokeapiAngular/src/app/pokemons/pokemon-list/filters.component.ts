@@ -66,11 +66,18 @@ export class FiltersComponent implements OnInit {
     }
 
     fillGenerations() {
-        this.pokemonService.getGenerations().subscribe((generations: { results: { name: string }[]} ) => {
+        this.pokemonService.getGenerations().subscribe((generations: { results: { name: string }[] }) => {
             generations.results.forEach(generation => {
                 this.generations.push(generation.name)
             });
         });
+    }
+
+    orderAlphabetically(value: string) {
+        this.filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
+        if(value === 'falling') {
+            this.filteredPokemons.reverse();
+        }
     }
 
 }
