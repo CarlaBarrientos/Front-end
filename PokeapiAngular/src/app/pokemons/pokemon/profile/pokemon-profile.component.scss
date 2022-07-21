@@ -62,20 +62,24 @@
     font-family: Roboto;
     text-align: center;
     font-size: 320%;
-    text-transform: capitalize;
-    margin: 0;
+    margin: auto;
     height: auto;
+    font-weight: 700; color:#202020;
+    text-transform: uppercase;
+    word-spacing: 1px; 
+    letter-spacing:2px;
 }
 
 .title-container {
-    padding-top: 32px;
-    padding-bottom: 32px;
-    height: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    height: 56px;
 }
 
 .return-button {
     position: absolute;
-    margin-left: 32px;
+    margin-left: 22px;
+    margin-top: -10px;
 }
 
 @media (max-width: 850px) {
