@@ -13,7 +13,6 @@ export class TagComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        console.log(this.type);
         this.color = this.getTagColor(this.type)
     }
 

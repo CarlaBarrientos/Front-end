@@ -17,59 +17,39 @@ export class PokemonProfileComponent implements OnInit {
         private pokemonService: PokemonService) { }
 
     async ngOnInit() {
-        //this.route.params.subscribe(routeParams => {
         this.pokemonInformation = this.route.snapshot.data["pokemon"];
         this.pokemonInformation.evolution = [];
+        this.getSpecies();
+        this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
+    }
+
+    getSpecies() {
         this.pokemonService.getPokemonSpecies(this.pokemonInformation.id).subscribe(
             (specie: { flavor_text_entries: { flavor_text: string }[], evolution_chain: { url: string } }) => {
                 this.pokemonInformation.description = specie.flavor_text_entries[0].flavor_text.trim();
                 this.pokemonInformation.evolutionUrl = specie.evolution_chain.url;
-                this.pokemonService.getPokemonEvolution(this.pokemonInformation.evolutionUrl).subscribe(
-                    (results: any) => {
-                        var evoData = results.chain;
-
-                        do {
-                            var evoDetails = evoData['evolution_details'][0];
-                            const id = this.pokemonService.getPokemonId(evoData.species.url);
-                            this.pokemonInformation.evolution.push({
-                                id: this.pokemonService.getPokemonId(evoData.species.url as string),
-                                name: evoData.species.name as string,
-                                url: evoData.species.url as string,
-                                image: this.pokemonService.getPokemonImageUri(id)
-                            });
-
-                            evoData = evoData['evolves_to'][0];
-                        } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
-                    }
-                );
+                this.getEvolution();
             }
         );
-        this.pokemonInformation.image = this.pokemonService.getPokemonImageUri(this.pokemonInformation.id);
-        //});
-        // this.pokemonId = this.route.snapshot.paramMap.get('id')!;
-        // console.log(this.pokemonId)
-        // this.pokemonService.getPokemonDescription(this.pokemonId)
-        //     .subscribe(
-        //         (descriptions: { flavor_text_entries: { flavor_text: string }[] }) => {
-        //             console.log(descriptions.flavor_text_entries[0]);
-        //         }
-        //     );
-        // this.pokemonService.getPokemonInformation(this.pokemonId)
-        //     .subscribe((response: {
-        //         abilities: { ability: { name: string } }[], 
-        //         height: number, 
-        //         weight: number,
-        //         types: { type: { name: string } }[],
-        //         stats: { base_stat: number, stat: { name: string } }[]
-        //     }) => {
-        //         console.log(response.abilities);
-        //         console.log(response.height);
-        //         console.log(response.weight);
-        //         console.log(response.types);
-        //         console.log(response.stats);
-        //     });
-        // const generation = this.pokemonService.getPokemonGeneration(this.pokemonId);
-        // console.log(generation)
+    }
+
+    getEvolution() {
+        this.pokemonService.getPokemonEvolution(this.pokemonInformation.evolutionUrl).subscribe(
+            (results: any) => {
+                let evolutionData = results.chain;
+                do {
+                    const id = this.pokemonService.getPokemonId(evolutionData.species.url);
+                    this.pokemonInformation.evolution.push({
+                        id: this.pokemonService.getPokemonId(evolutionData.species.url as string),
+                        name: evolutionData.species.name as string,
+                        url: evolutionData.species.url as string,
+                        image: this.pokemonService.getPokemonImageUri(id)
+                    });
+
+                    evolutionData = evolutionData['evolves_to'][0];
+                } while (!!evolutionData && evolutionData.hasOwnProperty('evolves_to'));
+            }
+        );
     }
 
     goBack() {

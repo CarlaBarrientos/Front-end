@@ -7,15 +7,11 @@ import { PokemonApi } from 'src/app/core/models/PokemonApi';
     templateUrl: './evolution-card.component.html',
     styleUrls: ['./evolution-card.component.scss']
 })
-export class EvolutionCardComponent implements OnInit{
+export class EvolutionCardComponent {
 
     @Input() evolutions!: PokemonApi[];
 
     constructor(private router: Router) { }
-
-    ngOnInit(): void { 
-        console.log(this.evolutions);
-    }
 
     redirectToProfile(pokemonId: string) {
         this.router.navigate(['/pokedex/', `#${pokemonId}`])

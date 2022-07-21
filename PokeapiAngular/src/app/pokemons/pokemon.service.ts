@@ -41,14 +41,6 @@ export class PokemonService {
 
     getPokemonInformation(id: string) {
         return this.http.get(`${this.API}/pokemon/${id}`) as Observable<PokemonInformation>;
-        // return this.http.get(`${this.API}/pokemon/${name}`) as Observable<{
-        //     abilities: { ability: { name: string } }[],
-        //     height: number,
-        //     weight: number,
-        //     types: { type: { name: string } }[],
-        //     stats: { base_stat: number, stat: { name: string } }[]
-        // }
-        // >;
     }
 
     getPokemonEvolution(url: string) {
