@@ -5,54 +5,84 @@
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name">
+                <mat-error *ngIf="!profileForm.controls['name'].valid && profileForm.controls['name'].touched">
+                    Name is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Color</mat-label>
                 <input matInput formControlName="color">
+                <mat-error *ngIf="!profileForm.controls['color'].valid && profileForm.controls['color'].touched">
+                    Color is required
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Height</mat-label>
                 <input matInput formControlName="height">
+                <mat-error *ngIf="!profileForm.controls['height'].valid && profileForm.controls['height'].touched">
+                    Height value is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Weight</mat-label>
                 <input matInput formControlName="weight">
+                <mat-error *ngIf="!profileForm.controls['weight'].valid && profileForm.controls['weight'].touched">
+                    Weight value is required
+                </mat-error>
             </mat-form-field>
         </div>
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description"></textarea>
+            <mat-error *ngIf="!profileForm.controls['description'].valid && profileForm.controls['description'].touched">
+                {{ getErrorDescription() }}
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Image</mat-label>
             <input matInput formControlName="image">
+            <mat-error *ngIf="!profileForm.controls['image'].valid && profileForm.controls['image'].touched">
+                Image URL is required
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Generation</mat-label>
             <mat-select formControlName="generation">
                 <mat-option *ngFor="let generation of generations" value={{generation}} class="capitalize">{{generation}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="!profileForm.controls['generation'].valid && profileForm.controls['generation'].touched">
+                Select a generation
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Abilities</mat-label>
             <mat-select formControlName="abilities" multiple>
                 <mat-option *ngFor="let ability of abilities" value={{ability}} class="capitalize">{{ability}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="!profileForm.controls['abilities'].valid && profileForm.controls['abilities'].touched">
+                Select at least one ability
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Types</mat-label>
             <mat-select formControlName="types" multiple>
                 <mat-option *ngFor="let type of pokemonTypes" value={{type}} class="capitalize">{{type}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="!profileForm.controls['types'].valid && profileForm.controls['types'].touched">
+                Select at least one type
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Stats</mat-label>
             <mat-select formControlName="stats" multiple>
                 <mat-option *ngFor="let stat of stats" value={{stat}} class="capitalize">{{stat}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="!profileForm.controls['stats'].valid && profileForm.controls['stats'].touched">
+                Select at least one stat
+            </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Add Pokemon</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Add Pokemon</button>
     </form>
 </div>

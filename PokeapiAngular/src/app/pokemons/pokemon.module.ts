@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { FiltersComponent } from './pokemon-list/filters.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const materialModules = [
   MatButtonModule,
@@ -26,6 +27,7 @@ const materialModules = [
   MatIconModule,
   MatInputModule,
   MatSelectModule,
+  MatSnackBarModule
 ];
 @NgModule({
   declarations: [

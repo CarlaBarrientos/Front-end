@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PokemonService } from '../../pokemon.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-pokemon-add',
@@ -9,16 +10,16 @@ import { PokemonService } from '../../pokemon.service';
 })
 export class PokemonAddComponent implements OnInit {
     profileForm = new FormGroup({
-        name: new FormControl(''),
-        description: new FormControl(''),
-        image: new FormControl(''),
-        color: new FormControl(''),
-        height: new FormControl(''),
-        weight: new FormControl(''),
-        generation: new FormControl(''),
-        abilities: new FormControl(''),
-        types: new FormControl(''),
-        stats: new FormControl('')
+        name: new FormControl('', Validators.required),
+        description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+        image: new FormControl('', Validators.required),
+        color: new FormControl('', Validators.required),
+        height: new FormControl('', Validators.required),
+        weight: new FormControl('', Validators.required),
+        generation: new FormControl('', Validators.required),
+        abilities: new FormControl('', Validators.required),
+        types: new FormControl('', Validators.required),
+        stats: new FormControl('', Validators.required)
     });
     generations: string[] = [];
     abilities: string[] = [];
@@ -26,7 +27,8 @@ export class PokemonAddComponent implements OnInit {
     stats: string[] = [];
 
     constructor(private fb: FormBuilder,
-        private pokemonService: PokemonService) { }
+        private pokemonService: PokemonService,
+        private _snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.fillGenerations();
@@ -45,10 +47,11 @@ export class PokemonAddComponent implements OnInit {
 
     onSubmit() {
         console.warn(this.profileForm.value);
+        this._snackBar.open('Pokemon added succesfully!', 'Done');
     }
 
     fillGenerations() {
-        this.pokemonService.getGenerations().subscribe((generations: { results: { name: string }[]} ) => {
+        this.pokemonService.getGenerations().subscribe((generations: { results: { name: string }[] }) => {
             generations.results.forEach(generation => {
                 this.generations.push(generation.name)
             });
@@ -56,7 +59,7 @@ export class PokemonAddComponent implements OnInit {
     }
 
     fillAbilities() {
-        this.pokemonService.getAbilities().subscribe((abilities: { results: { name: string }[]} ) => {
+        this.pokemonService.getAbilities().subscribe((abilities: { results: { name: string }[] }) => {
             abilities.results.forEach(ability => {
                 this.abilities.push(ability.name)
             });
@@ -64,7 +67,7 @@ export class PokemonAddComponent implements OnInit {
     }
 
     fillTypes() {
-        this.pokemonService.getTypes().subscribe((types: { results: { name: string }[]} ) => {
+        this.pokemonService.getTypes().subscribe((types: { results: { name: string }[] }) => {
             types.results.forEach(type => {
                 this.pokemonTypes.push(type.name)
             });
@@ -72,10 +75,15 @@ export class PokemonAddComponent implements OnInit {
     }
 
     fillStats() {
-        this.pokemonService.getStats().subscribe((stats: { results: { name: string }[]} ) => {
+        this.pokemonService.getStats().subscribe((stats: { results: { name: string }[] }) => {
             stats.results.forEach(stat => {
                 this.stats.push(stat.name)
             });
         });
+    }
+
+    getErrorDescription() {
+        return this.profileForm.get('description')?.hasError('required') ? 'Enter some description' :
+            'Description must contain at least 5 characters';
     }
 }
