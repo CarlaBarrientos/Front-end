@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PokemonCardComponent } from './pokemon-list/pokemon-card.component';
 import { CoreModule } from '../core/core.module';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokemonProfileComponent } from './pokemon/profile/pokemon-profile.component';
@@ -18,8 +17,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { FiltersComponent } from './pokemon-list/filters.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FiltersComponent } from './pokemon-list/filters/filters.component';
+import { PokemonCardComponent } from './pokemon-list/card/pokemon-card.component';
 
 const materialModules = [
   MatButtonModule,

@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HomeComponent } from './home/home.component';
 
 const materialModules = [
   MatButtonModule,
@@ -17,6 +18,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     HeaderComponent,
+    HomeComponent,
     SearchBarComponent
   ],
   imports: [
@@ -27,6 +29,7 @@ const materialModules = [
   providers: [],
   exports: [
     HeaderComponent,
+    HomeComponent,
     SearchBarComponent
   ]
 })

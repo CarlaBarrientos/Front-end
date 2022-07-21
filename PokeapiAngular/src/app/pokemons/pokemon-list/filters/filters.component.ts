@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pokemon } from '../../core/models/Pokemon';
-import { PokemonService } from '../pokemon.service';
+import { Pokemon } from '../../../core/models/Pokemon';
+import { PokemonService } from '../../pokemon.service';
 
 @Component({
     selector: 'app-filters',
