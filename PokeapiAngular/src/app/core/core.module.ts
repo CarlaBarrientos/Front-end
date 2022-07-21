@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home/home.component';
 import { TagComponent } from './tag/tag.component';
+import { FooterComponent } from './footer/footer.component';
 
 const materialModules = [
   MatButtonModule,
@@ -18,6 +19,7 @@ const materialModules = [
 ];
 @NgModule({
   declarations: [
+    FooterComponent,
     HeaderComponent,
     HomeComponent,
     SearchBarComponent,
@@ -30,6 +32,7 @@ const materialModules = [
   ],
   providers: [],
   exports: [
+    FooterComponent,
     HeaderComponent,
     HomeComponent,
     SearchBarComponent,
