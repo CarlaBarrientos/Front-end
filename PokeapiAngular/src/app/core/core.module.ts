@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home/home.component';
+import { TagComponent } from './tag/tag.component';
 
 const materialModules = [
   MatButtonModule,
@@ -19,7 +20,8 @@ const materialModules = [
   declarations: [
     HeaderComponent,
     HomeComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    TagComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ const materialModules = [
   exports: [
     HeaderComponent,
     HomeComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    TagComponent
   ]
 })
 export class CoreModule { }

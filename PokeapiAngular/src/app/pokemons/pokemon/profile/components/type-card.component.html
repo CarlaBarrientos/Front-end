@@ -1,8 +1,9 @@
 <div class="content">
     <h1>Type</h1>
-    <ul>
-        <li *ngFor="let type of parseTypes">
-            <h3>{{type}}</h3>
-        </li>
-    </ul>
+    <div class="tags">
+        <div *ngFor="let type of parseTypes">
+            <!-- <h3>{{type}}</h3> -->
+            <app-tag [type]="type"></app-tag>
+        </div>
+    </div>
 </div>
